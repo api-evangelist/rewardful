@@ -1,0 +1,345 @@
+vocabulary:
+  name: Rewardful API Vocabulary
+  description: Domain vocabulary for the Rewardful affiliate and referral tracking REST API.
+  baseURL: https://api.getrewardful.com/v1
+  humanURL: https://developers.rewardful.com/rest-api/overview
+  version: v1
+
+resources:
+
+  - name: Campaign
+    description: Represents an affiliate program offer defining commission structure, payout rules, and affiliate link settings.
+    url: https://developers.rewardful.com/rest-api/campaigns/the-campaign-object
+    properties:
+      - name: id
+        type: string (UUID)
+        description: Unique campaign identifier.
+      - name: created_at
+        type: ISO 8601 datetime
+        description: Campaign creation timestamp.
+      - name: updated_at
+        type: ISO 8601 datetime
+        description: Last modification timestamp.
+      - name: name
+        type: string
+        description: Campaign display name.
+      - name: url
+        type: string (URL)
+        description: Base URL used to generate affiliate links.
+      - name: private
+        type: boolean
+        description: Controls public vs. invitation-only affiliate registration.
+      - name: private_tokens
+        type: boolean
+        description: When true, uses random tokens instead of name-based affiliate link tokens.
+      - name: reward_type
+        type: string
+        description: "Commission type: 'percent' or 'amount'."
+      - name: commission_percent
+        type: float
+        description: Percentage-based commission rate (for percent campaigns).
+      - name: commission_amount_cents
+        type: integer
+        description: Fixed commission in cents (for amount campaigns).
+      - name: commission_amount_currency
+        type: string (ISO 4217)
+        description: ISO currency code for fixed commission.
+      - name: minimum_payout_cents
+        type: integer
+        description: Minimum cumulative commission balance required before a payout is created.
+      - name: minimum_payout_currency
+        type: string (ISO 4217)
+        description: ISO currency code for minimum payout threshold.
+      - name: max_commission_period_months
+        type: integer
+        description: Maximum number of months commissions are earned per referral.
+      - name: max_commissions
+        type: integer
+        description: Maximum number of commissions paid per referral.
+      - name: days_before_referrals_expire
+        type: integer
+        description: Number of days in the referral-to-conversion attribution window.
+      - name: days_until_commissions_are_due
+        type: integer
+        description: Days from a sale until the commission becomes due.
+      - name: default
+        type: boolean
+        description: Designates this as the default campaign for the company.
+      - name: affiliate_dashboard_text
+        type: string
+        description: Custom messaging shown to affiliates on the login page.
+      - name: custom_reward_description
+        type: string
+        description: Custom explanation of the reward shown to affiliates.
+      - name: welcome_text
+        type: string
+        description: Messaging shown on the affiliate signup page.
+      - name: customers_visible_to_affiliates
+        type: boolean
+        description: Whether affiliates can see the identities of referred customers.
+      - name: sale_description_visible_to_affiliates
+        type: boolean
+        description: Whether affiliates can see purchase detail descriptions.
+      - name: parameter_type
+        type: string
+        description: Whether affiliate tokens are placed in the query string or hash fragment.
+      - name: stripe_coupon_id
+        type: string
+        description: Associated Stripe coupon identifier applied to referred customers.
+      - name: visitors
+        type: integer
+        description: Total unique visitor count across all campaign affiliate links.
+      - name: leads
+        type: integer
+        description: Total number of anonymous visitors who became known leads.
+      - name: conversions
+        type: integer
+        description: Total number of leads who became paying customers.
+      - name: affiliates
+        type: integer
+        description: Number of affiliates registered to this campaign.
+
+  - name: Affiliate
+    description: An individual or entity that promotes a campaign and earns commissions for referrals.
+    url: https://developers.rewardful.com/rest-api/affiliates/object
+    properties:
+      - name: id
+        type: string (UUID)
+        description: Unique affiliate identifier.
+      - name: created_at
+        type: ISO 8601 datetime
+        description: Timestamp of affiliate account creation.
+      - name: updated_at
+        type: ISO 8601 datetime
+        description: Timestamp of last affiliate account modification.
+      - name: first_name
+        type: string
+        description: Affiliate's first name.
+      - name: last_name
+        type: string
+        description: Affiliate's last name.
+      - name: email
+        type: string (email)
+        description: Affiliate's primary email address.
+      - name: paypal_email
+        type: string (email)
+        description: Alternative PayPal email for payouts, or null if same as primary.
+      - name: wise_email
+        type: string (email)
+        description: Alternative Wise email for payouts, or null if same as primary.
+      - name: state
+        type: string
+        description: "Current affiliate status: 'active', 'disabled', or 'suspicious'."
+      - name: stripe_customer_id
+        type: string
+        description: Associated Stripe Customer ID (for customer referral programs).
+      - name: stripe_account_id
+        type: string
+        description: Stripe account containing the customer (for customer referral programs).
+      - name: visitors
+        type: integer
+        description: Total unique visitors attributed to this affiliate.
+      - name: leads
+        type: integer
+        description: Total leads attributed to this affiliate.
+      - name: conversions
+        type: integer
+        description: Total conversions attributed to this affiliate.
+      - name: campaign
+        type: object (Campaign)
+        description: The campaign this affiliate belongs to.
+      - name: links
+        type: array (AffiliateLink)
+        description: Collection of affiliate tracking links for this affiliate.
+      - name: coupon
+        type: object (AffiliateCoupon)
+        description: Associated coupon object, if any.
+
+  - name: AffiliateLink
+    description: A unique tracking URL assigned to an affiliate for attributing referral traffic.
+    url: https://developers.rewardful.com/rest-api/affiliate-links/the-affiliate-link-object
+    properties:
+      - name: id
+        type: string (UUID)
+        description: Unique identifier for this affiliate link.
+      - name: url
+        type: string (URL)
+        description: Full URL combining the campaign base URL with the unique token.
+      - name: token
+        type: string
+        description: Unique token appended to the campaign URL for tracking.
+      - name: visitors
+        type: integer
+        description: Number of unique visitors attributed to this link.
+      - name: leads
+        type: integer
+        description: Number of leads attributed to this link.
+      - name: conversions
+        type: integer
+        description: Number of conversions attributed to this link.
+      - name: affiliate_id
+        type: string (UUID)
+        description: Identifier of the affiliate who owns this link (omitted when nested within an affiliate object).
+
+  - name: Referral
+    description: Tracks a visitor's journey from initial referral through lead and conversion states.
+    url: https://developers.rewardful.com/rest-api/referrals/object
+    properties:
+      - name: id
+        type: string (UUID)
+        description: Unique identifier for the referral.
+      - name: created_at
+        type: ISO 8601 datetime
+        description: When the referral was created.
+      - name: updated_at
+        type: ISO 8601 datetime
+        description: When the referral was last updated.
+      - name: link
+        type: object (AffiliateLink)
+        description: The affiliate link that originated this referral.
+      - name: visits
+        type: integer
+        description: Number of site visits from this referral.
+      - name: customer
+        type: object
+        description: Payment customer info (id, name, email, platform).
+      - name: affiliate
+        type: object (Affiliate)
+        description: The affiliate who generated this referral.
+      - name: became_lead_at
+        type: ISO 8601 datetime
+        description: When the referral transitioned from visitor to lead state.
+      - name: became_conversion_at
+        type: ISO 8601 datetime
+        description: When the referral became a paying conversion.
+      - name: expires_at
+        type: ISO 8601 datetime
+        description: Referral expiration date based on campaign attribution window.
+      - name: deactivated_at
+        type: ISO 8601 datetime
+        description: When the referral was deactivated, or null if still active.
+      - name: conversion_state
+        type: string
+        description: "Current state: 'visitor', 'lead', or 'conversion'."
+      - name: stripe_account_id
+        type: string
+        description: Stripe account identifier for the referred customer.
+      - name: stripe_customer_id
+        type: string
+        description: Stripe customer identifier for the referred customer.
+
+  - name: Commission
+    description: A reward earned by an affiliate when a referred customer makes a qualifying purchase.
+    url: https://developers.rewardful.com/rest-api/commissions/object
+    properties:
+      - name: id
+        type: string (UUID)
+        description: Unique commission identifier.
+      - name: created_at
+        type: ISO 8601 datetime
+        description: When the commission was created.
+      - name: updated_at
+        type: ISO 8601 datetime
+        description: When the commission was last modified.
+      - name: amount
+        type: integer
+        description: Monetary value of the commission in cents.
+      - name: currency
+        type: string (ISO 4217)
+        description: ISO currency code for the commission amount.
+      - name: state
+        type: string
+        description: "Commission status: 'pending', 'due', 'paid', or 'voided'."
+      - name: due_at
+        type: ISO 8601 datetime
+        description: When the commission becomes due for payout.
+      - name: paid_at
+        type: ISO 8601 datetime
+        description: When the commission was paid out, or null if unpaid.
+      - name: voided_at
+        type: ISO 8601 datetime
+        description: When the commission was voided, or null if active.
+      - name: campaign
+        type: object (Campaign)
+        description: The campaign used to calculate this commission.
+      - name: sale
+        type: object (Sale)
+        description: The sale event that triggered the commission.
+
+  - name: Payout
+    description: A bundle of due commissions to be paid to a single affiliate.
+    url: https://developers.rewardful.com/rest-api/payouts/the-payout-object
+    properties:
+      - name: id
+        type: string (UUID)
+        description: Unique payout identifier.
+      - name: created_at
+        type: ISO 8601 datetime
+        description: When the payout was created.
+      - name: updated_at
+        type: ISO 8601 datetime
+        description: When the payout was last updated.
+      - name: amount
+        type: integer
+        description: Total monetary value of the payout in cents.
+      - name: currency
+        type: string (ISO 4217)
+        description: ISO currency code for the payout amount.
+      - name: state
+        type: string
+        description: "Payout status: 'pending', 'due', 'processing', or 'paid'."
+      - name: paid_at
+        type: ISO 8601 datetime
+        description: When the payout was marked as paid.
+      - name: paid_by_id
+        type: string (UUID)
+        description: Identifier of the user who marked the payout as paid.
+      - name: affiliate
+        type: object (Affiliate)
+        description: The affiliate to whom this payout is owed.
+      - name: commissions
+        type: array (Commission)
+        description: The list of commissions included in this payout.
+
+webhookEvents:
+  description: Events emitted by Rewardful when resource state changes occur.
+  url: https://developers.rewardful.com/webhooks/event-types
+  events:
+    affiliates:
+      - affiliate.created
+      - affiliate.confirmed
+      - affiliate.updated
+      - affiliate.deleted
+    affiliateLinks:
+      - affiliate_link.created
+      - affiliate_link.updated
+      - affiliate_link.deleted
+    affiliateCoupons:
+      - affiliate_coupon.created
+      - affiliate_coupon.updated
+      - affiliate_coupon.activated
+      - affiliate_coupon.deactivated
+      - affiliate_coupon.deleted
+    referrals:
+      - referral.created
+      - referral.lead
+      - referral.converted
+      - referral.deleted
+    sales:
+      - sale.created
+      - sale.updated
+      - sale.refunded
+      - sale.deleted
+    commissions:
+      - commission.created
+      - commission.updated
+      - commission.paid
+      - commission.voided
+      - commission.deleted
+    payouts:
+      - payout.created
+      - payout.updated
+      - payout.due
+      - payout.paid
+      - payout.deleted
+      - payout.failed

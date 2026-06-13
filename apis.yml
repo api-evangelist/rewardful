@@ -56,6 +56,12 @@ common:
     url: rate-limits/rewardful-rate-limits.yml
   - type: FinOps
     url: finops/rewardful-finops.yml
+  - type: JSONLDContext
+    url: json-ld/rewardful-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/rewardful-vocabulary.yml
+  - type: BlogPosts
+    url: blogs/blogs.json
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

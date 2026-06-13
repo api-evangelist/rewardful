@@ -1,0 +1,272 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "rewardful": "https://developers.rewardful.com/vocab#",
+
+    "Campaign": "rewardful:Campaign",
+    "Affiliate": "rewardful:Affiliate",
+    "AffiliateLink": "rewardful:AffiliateLink",
+    "AffiliateCoupon": "rewardful:AffiliateCoupon",
+    "Referral": "rewardful:Referral",
+    "Commission": "rewardful:Commission",
+    "Payout": "rewardful:Payout",
+    "Sale": "rewardful:Sale",
+    "WebhookEvent": "rewardful:WebhookEvent",
+
+    "id": "@id",
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "name": "schema:name",
+    "email": "schema:email",
+    "url": "schema:url",
+    "currency": "schema:currency",
+
+    "campaign": {
+      "@id": "rewardful:campaign",
+      "@type": "@id"
+    },
+    "affiliate": {
+      "@id": "rewardful:affiliate",
+      "@type": "@id"
+    },
+    "affiliateLink": {
+      "@id": "rewardful:affiliateLink",
+      "@type": "@id"
+    },
+    "referral": {
+      "@id": "rewardful:referral",
+      "@type": "@id"
+    },
+    "commission": {
+      "@id": "rewardful:commission",
+      "@type": "@id"
+    },
+    "payout": {
+      "@id": "rewardful:payout",
+      "@type": "@id"
+    },
+    "sale": {
+      "@id": "rewardful:sale",
+      "@type": "@id"
+    },
+
+    "private": {
+      "@id": "rewardful:private",
+      "@type": "xsd:boolean"
+    },
+    "private_tokens": {
+      "@id": "rewardful:privateTokens",
+      "@type": "xsd:boolean"
+    },
+    "reward_type": {
+      "@id": "rewardful:rewardType",
+      "@type": "xsd:string",
+      "@comment": "Either 'percent' or 'amount'"
+    },
+    "commission_percent": {
+      "@id": "rewardful:commissionPercent",
+      "@type": "xsd:float"
+    },
+    "commission_amount_cents": {
+      "@id": "rewardful:commissionAmountCents",
+      "@type": "xsd:integer"
+    },
+    "commission_amount_currency": {
+      "@id": "rewardful:commissionAmountCurrency",
+      "@type": "xsd:string"
+    },
+    "minimum_payout_cents": {
+      "@id": "rewardful:minimumPayoutCents",
+      "@type": "xsd:integer"
+    },
+    "minimum_payout_currency": {
+      "@id": "rewardful:minimumPayoutCurrency",
+      "@type": "xsd:string"
+    },
+    "max_commission_period_months": {
+      "@id": "rewardful:maxCommissionPeriodMonths",
+      "@type": "xsd:integer"
+    },
+    "max_commissions": {
+      "@id": "rewardful:maxCommissions",
+      "@type": "xsd:integer"
+    },
+    "days_before_referrals_expire": {
+      "@id": "rewardful:daysBeforeReferralsExpire",
+      "@type": "xsd:integer"
+    },
+    "days_until_commissions_are_due": {
+      "@id": "rewardful:daysUntilCommissionsAreDue",
+      "@type": "xsd:integer"
+    },
+    "default": {
+      "@id": "rewardful:default",
+      "@type": "xsd:boolean"
+    },
+    "affiliate_dashboard_text": {
+      "@id": "rewardful:affiliateDashboardText",
+      "@type": "xsd:string"
+    },
+    "custom_reward_description": {
+      "@id": "rewardful:customRewardDescription",
+      "@type": "xsd:string"
+    },
+    "welcome_text": {
+      "@id": "rewardful:welcomeText",
+      "@type": "xsd:string"
+    },
+    "customers_visible_to_affiliates": {
+      "@id": "rewardful:customersVisibleToAffiliates",
+      "@type": "xsd:boolean"
+    },
+    "sale_description_visible_to_affiliates": {
+      "@id": "rewardful:saleDescriptionVisibleToAffiliates",
+      "@type": "xsd:boolean"
+    },
+    "parameter_type": {
+      "@id": "rewardful:parameterType",
+      "@type": "xsd:string"
+    },
+    "stripe_coupon_id": {
+      "@id": "rewardful:stripeCouponId",
+      "@type": "xsd:string"
+    },
+    "visitors": {
+      "@id": "rewardful:visitors",
+      "@type": "xsd:integer"
+    },
+    "leads": {
+      "@id": "rewardful:leads",
+      "@type": "xsd:integer"
+    },
+    "conversions": {
+      "@id": "rewardful:conversions",
+      "@type": "xsd:integer"
+    },
+    "affiliates": {
+      "@id": "rewardful:affiliates",
+      "@type": "xsd:integer"
+    },
+
+    "first_name": {
+      "@id": "schema:givenName",
+      "@type": "xsd:string"
+    },
+    "last_name": {
+      "@id": "schema:familyName",
+      "@type": "xsd:string"
+    },
+    "paypal_email": {
+      "@id": "rewardful:paypalEmail",
+      "@type": "xsd:string"
+    },
+    "wise_email": {
+      "@id": "rewardful:wiseEmail",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "rewardful:state",
+      "@type": "xsd:string"
+    },
+    "stripe_customer_id": {
+      "@id": "rewardful:stripeCustomerId",
+      "@type": "xsd:string"
+    },
+    "stripe_account_id": {
+      "@id": "rewardful:stripeAccountId",
+      "@type": "xsd:string"
+    },
+    "links": {
+      "@id": "rewardful:links",
+      "@container": "@set"
+    },
+    "coupon": {
+      "@id": "rewardful:coupon",
+      "@type": "@id"
+    },
+
+    "token": {
+      "@id": "rewardful:token",
+      "@type": "xsd:string"
+    },
+    "affiliate_id": {
+      "@id": "rewardful:affiliateId",
+      "@type": "xsd:string"
+    },
+
+    "amount": {
+      "@id": "schema:amount",
+      "@type": "xsd:integer",
+      "@comment": "Monetary value in cents"
+    },
+    "due_at": {
+      "@id": "rewardful:dueAt",
+      "@type": "xsd:dateTime"
+    },
+    "paid_at": {
+      "@id": "rewardful:paidAt",
+      "@type": "xsd:dateTime"
+    },
+    "voided_at": {
+      "@id": "rewardful:voidedAt",
+      "@type": "xsd:dateTime"
+    },
+
+    "paid_by_id": {
+      "@id": "rewardful:paidById",
+      "@type": "xsd:string"
+    },
+    "commissions": {
+      "@id": "rewardful:commissions",
+      "@container": "@set"
+    },
+
+    "link": {
+      "@id": "rewardful:link",
+      "@type": "@id"
+    },
+    "customer": {
+      "@id": "rewardful:customer",
+      "@type": "@id"
+    },
+    "visits": {
+      "@id": "rewardful:visits",
+      "@type": "xsd:integer"
+    },
+    "became_lead_at": {
+      "@id": "rewardful:becameLeadAt",
+      "@type": "xsd:dateTime"
+    },
+    "became_conversion_at": {
+      "@id": "rewardful:becameConversionAt",
+      "@type": "xsd:dateTime"
+    },
+    "expires_at": {
+      "@id": "rewardful:expiresAt",
+      "@type": "xsd:dateTime"
+    },
+    "deactivated_at": {
+      "@id": "rewardful:deactivatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "conversion_state": {
+      "@id": "rewardful:conversionState",
+      "@type": "xsd:string",
+      "@comment": "One of: visitor, lead, conversion"
+    },
+
+    "WebhookEventType": "rewardful:WebhookEventType",
+    "event_type": {
+      "@id": "rewardful:eventType",
+      "@type": "xsd:string"
+    }
+  }
+}

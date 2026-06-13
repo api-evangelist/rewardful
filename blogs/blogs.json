@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "provider": "rewardful",
+    "blogURL": "https://www.rewardful.com/articles",
+    "rssURL": null,
+    "rssConfirmed": false,
+    "note": "No RSS/Atom feed URL discovered. Blog posts were identified by crawling the articles index page. Last crawled: 2026-06-13.",
+    "lastChecked": "2026-06-13"
+  },
+  "posts": [
+    {
+      "title": "Rewardful State of SaaS Affiliate Programs Report [2026 Edition]",
+      "url": "https://www.rewardful.com/articles/state-of-saas-affiliate-programs-report",
+      "author": "Tomas Laurinavicius",
+      "published": "2026-03-17",
+      "updated": "2026-03-20"
+    },
+    {
+      "title": "Why Constantly Changing Your SaaS Pricing Can Break Your Affiliate Program (And How to Fix It)",
+      "url": "https://www.rewardful.com/articles/affiliate-program-pricing-changes",
+      "author": null,
+      "published": null,
+      "updated": null
+    },
+    {
+      "title": "The Best Affiliate Software for AI SaaS Companies in 2026",
+      "url": "https://www.rewardful.com/articles/best-affiliate-software-for-ai-saas-companies",
+      "author": null,
+      "published": null,
+      "updated": null
+    },
+    {
+      "title": "How Rewardful Tracks and Pays Affiliate Commissions (From Stripe Data to Payout)",
+      "url": "https://www.rewardful.com/articles/how-rewardful-pays-affiliate-commissions",
+      "author": null,
+      "published": null,
+      "updated": null
+    },
+    {
+      "title": "Why Affiliate Software Transaction Fees Are a Tax on Your Own Success",
+      "url": "https://www.rewardful.com/articles/affiliate-software-transaction-fees",
+      "author": null,
+      "published": null,
+      "updated": null
+    }
+  ]
+}
