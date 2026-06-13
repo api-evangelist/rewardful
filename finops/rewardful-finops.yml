@@ -1,0 +1,49 @@
+name: Rewardful FinOps
+description: FinOps Framework FOCUS-aligned cost and usage considerations for operating the Rewardful affiliate and referral tracking platform via its REST API.
+url: https://www.rewardful.com/pricing
+specificationVersion: '1.0'
+costs:
+  - name: Subscription Fee
+    description: Monthly or annual subscription cost for the Rewardful plan tier selected, covering platform access, API usage, affiliate management, and payout tooling.
+    type: Fixed
+    billingCycle: monthly
+    annualOption: true
+    tiers:
+      - name: Starter
+        amount: 49.00
+        currency: USD
+        affiliateRevenueLimit: 7500
+      - name: Growth
+        amount: 99.00
+        currency: USD
+        affiliateRevenueLimit: 15000
+      - name: Enterprise
+        amount: 149.00
+        currency: USD
+        affiliateRevenueLimit: unlimited
+  - name: Transaction Fee
+    description: Rewardful charges zero percent transaction fees on commissions processed through the platform on all plan tiers.
+    type: Variable
+    rate: 0.00
+    unit: percentage
+    note: Zero percent transaction fee is a key differentiator — all plans include this benefit.
+usage:
+  - name: API Requests
+    description: REST API calls consumed against the rate limit window of 45 requests per 30 seconds. No additional per-request cost beyond the subscription fee.
+    unit: requests
+    rateLimit: 45 per 30 seconds
+    cost: included
+  - name: Affiliate Revenue Managed
+    description: Total monthly affiliate revenue processed through the platform determines plan eligibility. Exceeding a plan's affiliate revenue limit requires upgrading to the next tier.
+    unit: USD
+    note: Monitor monthly affiliate revenue totals to avoid unexpected plan upgrades.
+optimization:
+  - name: Annual Billing Discount
+    description: Choosing annual billing provides the equivalent of 2 months free compared to monthly billing, reducing total annual spend by approximately 16.7%.
+    action: Switch to annual billing when usage is stable and predictable.
+  - name: Right-Size Plan Selection
+    description: Select a plan tier based on monthly affiliate revenue managed. Upgrading from Starter ($49) to Growth ($99) is warranted when exceeding $7,500/mo in affiliate revenue or when needing unlimited campaigns.
+    action: Monitor affiliate revenue monthly and adjust plan tier proactively.
+  - name: Free Trial Utilization
+    description: All plans include a 14-day free trial with no credit card required, allowing full evaluation before committing to a paid plan.
+    action: Use the trial period to validate integration and affiliate program setup before purchasing.

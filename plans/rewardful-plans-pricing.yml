@@ -1,0 +1,102 @@
+name: Rewardful Plans and Pricing
+description: Pricing plans for the Rewardful SaaS affiliate and referral tracking platform, offering tiered plans based on monthly affiliate revenue managed.
+url: https://www.rewardful.com/pricing
+specificationVersion: '0.1'
+plans:
+  - name: Starter
+    description: Entry-level plan for SaaS businesses launching their first affiliate or referral program, with a single campaign and core features.
+    url: https://www.rewardful.com/pricing
+    price: 49.00
+    currency: USD
+    billingCycle: monthly
+    annualDiscount: true
+    annualNote: 2 months free when billed annually
+    trial:
+      days: 14
+      creditCardRequired: false
+    limits:
+      - name: Monthly Affiliate Revenue
+        value: 7500
+        unit: USD
+      - name: Campaigns
+        value: 1
+        unit: campaigns
+      - name: Team Members
+        value: 2
+        unit: users
+      - name: Affiliates
+        value: unlimited
+      - name: Visitors
+        value: unlimited
+    features:
+      - Zero percent transaction fee
+      - REST API access
+      - All integrations
+      - PayPal mass payouts
+      - Wise bulk payouts
+      - Chat and email support
+      - Multiple currencies
+      - Self-referral fraud detection
+      - First or last touch attribution
+      - Coupon code tracking
+      - Double-sided incentives
+      - Two-way Stripe synchronization
+  - name: Growth
+    description: Most popular plan for growing SaaS businesses needing unlimited campaigns, custom branding, and advanced affiliate portal features.
+    url: https://www.rewardful.com/pricing
+    price: 99.00
+    currency: USD
+    billingCycle: monthly
+    annualDiscount: true
+    annualNote: 2 months free when billed annually
+    trial:
+      days: 14
+      creditCardRequired: false
+    limits:
+      - name: Monthly Affiliate Revenue
+        value: 15000
+        unit: USD
+      - name: Campaigns
+        value: unlimited
+      - name: Team Members
+        value: unlimited
+      - name: Affiliates
+        value: unlimited
+      - name: Visitors
+        value: unlimited
+    features:
+      - Everything in Starter
+      - Unlimited campaigns
+      - Unlimited team members
+      - Branded affiliate portal
+      - Custom domain
+      - Private invite-only campaigns
+      - Custom rewards configuration
+      - Custom scripts
+  - name: Enterprise
+    description: Enterprise plan for high-volume affiliate programs with unlimited affiliate revenue, phone support, and one-click PayPal payouts.
+    url: https://www.rewardful.com/pricing
+    price: 149.00
+    currency: USD
+    billingCycle: monthly
+    annualDiscount: true
+    annualNote: 2 months free when billed annually
+    trial:
+      days: 14
+      creditCardRequired: false
+    limits:
+      - name: Monthly Affiliate Revenue
+        value: unlimited
+      - name: Campaigns
+        value: unlimited
+      - name: Team Members
+        value: unlimited
+      - name: Affiliates
+        value: unlimited
+      - name: Visitors
+        value: unlimited
+    features:
+      - Everything in Growth
+      - Phone support
+      - One-click PayPal payouts
+      - Custom pricing available for very large programs

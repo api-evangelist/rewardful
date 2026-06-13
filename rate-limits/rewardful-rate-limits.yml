@@ -1,0 +1,22 @@
+name: Rewardful API Rate Limits
+description: Rate limiting details for the Rewardful REST API, including request thresholds per time window and guidance for handling 429 responses.
+url: https://developers.rewardful.com/rest-api/overview
+specificationVersion: '0.1'
+rateLimits:
+  - name: Standard Request Rate Limit
+    description: The default rate limit applied to all Rewardful REST API endpoints. Requests exceeding this limit receive HTTP 429 responses with RateLimit headers.
+    requests: 45
+    window: 30
+    windowUnit: seconds
+    scope: account
+    headers:
+      - name: RateLimit
+        description: Contains rate limit quota information to help clients handle failures and retry requests appropriately.
+    errorResponse:
+      statusCode: 429
+      description: Too Many Requests — returned when the rate limit window has been exceeded. Clients should inspect RateLimit response headers and back off before retrying.
+    guidance:
+      - Treat rate limits as absolute maximums, not targets.
+      - Throttle batch operations to avoid bursting against the limit.
+      - Implement exponential backoff when receiving 429 responses.
+      - Inspect RateLimit headers to determine reset timing before retrying.
