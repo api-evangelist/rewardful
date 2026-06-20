@@ -2,7 +2,7 @@ aid: rewardful
 name: Rewardful
 description: SaaS affiliate and referral tracking platform with a REST API for managing campaigns, affiliates, referrals, and Stripe-integrated commission payouts.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/rewardful/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -18,7 +18,7 @@ apis:
   - aid: rewardful:rewardful-rest-api
     name: Rewardful REST API
     description: REST API for programmatically managing campaigns, affiliates, referrals, commissions, payouts, and webhooks within a Rewardful account.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.rewardful.com/rest-api/overview
     baseURL: https://api.getrewardful.com/v1
     tags:
