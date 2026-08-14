@@ -1,23 +1,39 @@
 aid: rewardful
 name: Rewardful
-description: SaaS affiliate and referral tracking platform with a REST API for managing campaigns, affiliates, referrals, and Stripe-integrated commission payouts.
+description: >-
+  Rewardful is affiliate and referral management software for SaaS, connecting to Stripe or
+  Paddle to track referrals and commissions automatically — adjusting for upgrades,
+  downgrades, cancellations and refunds — and paying affiliates in bulk through PayPal or
+  Wise. Its v1 REST API exposes campaigns, affiliates, affiliate links, affiliate coupons,
+  referrals, commissions and payouts over HTTP Basic auth, alongside 33 signed webhook event
+  types and a browser tracking script with a client-side JavaScript conversion API. A Stripe
+  Premier Partner used by 3,000+ SaaS, tech and AI teams.
 type: Index
 accessModel:
   pricing: paid
-  onboarding: unknown
-  trial: false
+  onboarding: self-service
+  trial: true
+  trial_days: 14
+  trial_credit_card_required: false
   try_now: false
   public: false
   label: Paid
-  confidence: medium
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  - https://www.rewardful.com/pricing
+  - https://www.rewardful.com/llms.txt
+  generated: '2026-08-14'
+  method: searched
+  note: >-
+    Corrected in the 2026-08-14 pass. Every plan carries a 14-day free trial with no credit
+    card required, and sign-up is self-service at https://app.getrewardful.com/signup — the
+    prior derived record said trial:false and onboarding:unknown. There is still no public
+    API console or try-now surface: REST access requires an account API Secret.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/rewardful.png
 url: https://raw.githubusercontent.com/api-evangelist/rewardful/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-08-14'
 specificationVersion: '0.19'
 tags:
   - Affiliate Tracking
@@ -26,6 +42,12 @@ tags:
   - Stripe
   - Commissions
   - Payouts
+  - Affiliate Marketing
+  - Partner Programs
+  - Attribution
+  - Webhooks
+  - Paddle
+  - Marketing
 apis:
   - aid: rewardful:rewardful-rest-api
     name: Rewardful REST API
@@ -43,8 +65,22 @@ apis:
     properties:
       - type: Documentation
         url: https://developers.rewardful.com/rest-api/overview
-      - type: OpenAPI
-        url: https://developers.rewardful.com/
+      - type: APIReference
+        url: https://developers.rewardful.com/rest-api/overview
+      - type: Authentication
+        url: authentication/rewardful-authentication.yml
+      - type: Conventions
+        url: conventions/rewardful-conventions.yml
+      - type: ErrorCatalog
+        url: errors/rewardful-error-codes.yml
+      - type: DataModel
+        url: data-model/rewardful-data-model.yml
+      - type: Lifecycle
+        url: lifecycle/rewardful-lifecycle.yml
+      - type: Webhooks
+        url: asyncapi/rewardful-webhooks.yml
+      - type: ToolCrosswalk
+        url: mcp/rewardful-tool-crosswalk.yml
 common:
   - type: DomainSecurity
     url: security/rewardful-domain-security.yml
@@ -76,6 +112,78 @@ common:
     url: vocabulary/rewardful-vocabulary.yml
   - type: BlogPosts
     url: blogs/blogs.json
+  - type: DeveloperPortal
+    url: https://developers.rewardful.com/
+  - type: GettingStarted
+    url: https://developers.rewardful.com/readme
+  - type: HelpCenter
+    url: https://help.rewardful.com/en/
+  - type: Support
+    url: https://help.rewardful.com/en/collections/1092743-frequently-asked-questions
+  - type: SignUp
+    url: https://app.getrewardful.com/signup
+  - type: Login
+    url: https://app.getrewardful.com/login
+  - type: TermsOfService
+    url: https://www.rewardful.com/terms
+  - type: PrivacyPolicy
+    url: https://www.rewardful.com/privacy
+  - type: ChangeLog
+    url: changelog/rewardful-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/rewardful-lifecycle.yml
+  - type: Authentication
+    url: authentication/rewardful-authentication.yml
+  - type: Conventions
+    url: conventions/rewardful-conventions.yml
+  - type: ErrorCatalog
+    url: errors/rewardful-error-codes.yml
+  - type: DataModel
+    url: data-model/rewardful-data-model.yml
+  - type: Webhooks
+    url: asyncapi/rewardful-webhooks.yml
+  - type: Conformance
+    url: conformance/rewardful-conformance.yml
+  - type: Compliance
+    url: https://www.rewardful.com/trust-center
+  - type: TrustCenter
+    url: security/rewardful-trust-center.yml
+  - type: Packages
+    url: packages/rewardful-packages.yml
+  - type: Components
+    url: components/rewardful-components.yml
+  - type: MCPServer
+    url: mcp/rewardful-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/rewardful-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/rewardful-llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-14'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1
+x-contract-discovery:
+  date: '2026-08-14'
+  openapi: false
+  graphql: false
+  asyncapi: false
+  agent_card: false
+  mcp: true
+  note: >-
+    Rewardful publishes NO machine-readable API contract. /openapi.json, /openapi.yaml,
+    /swagger.json, /v1/openapi.json, /api-docs, /docs and /redoc were probed on
+    api.getrewardful.com and developers.rewardful.com and all returned 404; there is no
+    GraphQL surface and no AsyncAPI document. A stale `type: OpenAPI` pointer at
+    https://developers.rewardful.com/ was REMOVED from the REST API entry in this pass —
+    that URL is the GitBook docs home, not a spec, and the pointer was crediting a contract
+    that does not exist. What IS live and machine-readable: a documentation MCP server at
+    https://developers.rewardful.com/~gitbook/mcp (anonymous, 4 tools, tools/list 200) and
+    two llms.txt files. The REST reference itself is prose-only, so every derived artifact
+    in this repo is grounded in documented HTTP method + path, never in an invented
+    operationId.
