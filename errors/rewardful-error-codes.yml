@@ -1,0 +1,65 @@
+generated: '2026-08-14'
+method: searched
+source: https://developers.rewardful.com/rest-api/overview
+name: Rewardful API Error Catalog
+description: >-
+  Error responses documented for the Rewardful REST API. Rewardful does NOT use RFC 9457
+  problem+json; it returns a flat JSON object with an `error` string and, for validation
+  failures, a `details` array of field messages. There is no machine-readable error code
+  vocabulary — the `error` value is prose, so agents must branch on HTTP status, not on
+  an error identifier.
+format: custom-json
+rfc9457: false
+envelope:
+  content_type: application/json
+  fields:
+    - name: error
+      type: string
+      description: Human-readable description of the failure.
+    - name: details
+      type: array of string
+      description: Field-level validation messages. Present on 422 responses.
+errors:
+  - status: 401
+    name: Unauthorized
+    title: Missing or invalid API Secret
+    example: '{"error": "Invalid API Secret."}'
+    cause: The request omitted HTTP Basic credentials, or the API Secret supplied as the basic-auth username is wrong or rotated.
+    remediation: >-
+      Re-send with `-u YOUR_API_SECRET:` (secret as username, empty password). Rotate the
+      secret from Company Settings if it may be compromised.
+    source: https://developers.rewardful.com/rest-api/overview
+  - status: 404
+    name: Not Found
+    title: Requested object does not exist
+    example: '{"error": "Affiliate not found: "}'
+    cause: The UUID in the path does not resolve to an object in this account.
+    remediation: Verify the UUID and that it belongs to the authenticated account; list the collection to re-resolve it.
+    source: https://developers.rewardful.com/rest-api/overview
+  - status: 422
+    name: Unprocessable Entity
+    title: Invalid data passed to a create or update endpoint
+    example: '{"error": "Could not create affiliate.", "details": ["Email can''t be blank"]}'
+    cause: Request parameters failed model validation.
+    remediation: >-
+      Read every string in `details` — they are per-field validation messages — correct the
+      form-encoded body and resubmit. Safe to retry; there is no idempotency key, so confirm
+      nothing was partially created first.
+    source: https://developers.rewardful.com/rest-api/overview
+  - status: 429
+    name: Too Many Requests
+    title: Rate limit exceeded
+    cause: More than 45 requests were sent inside a 30 second window for the account.
+    remediation: >-
+      Read the `RateLimit` response header fields and back off until the quota resets;
+      throttle batch scripts with explicit sleeps.
+    source: https://developers.rewardful.com/rest-api/overview
+    see: rate-limits/rewardful-rate-limits.yml
+webhook_delivery_errors:
+  - condition: Your endpoint returns any status other than 200
+    behavior: Rewardful treats the delivery as failed and retries with exponential backoff for up to 3 days, then gives up.
+    source: https://developers.rewardful.com/webhooks/requests
+gaps:
+  - No documented 400 / 403 / 5xx catalog.
+  - No stable machine-readable error codes; only prose in `error`.
+  - No `type`/`instance` URIs, so errors cannot be dereferenced or linked to docs.

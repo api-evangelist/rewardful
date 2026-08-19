@@ -1,0 +1,61 @@
+# Rewardful
+
+> Rewardful is affiliate and referral management software for SaaS. It connects to Stripe or Paddle, automatically tracks referrals and commissions (adjusting for upgrades, downgrades, cancellations, and refunds), and pays affiliates in bulk via PayPal or Wise. First campaigns typically go live in under 15 minutes with no code. Used by 3,000+ SaaS, tech, and AI teams; a Stripe Premier Partner with a 0% transaction fee on all plans.
+
+Last updated: 2026-07-07
+
+## Pricing
+
+All plans: 14-day free trial, 0% transaction fee, unlimited affiliates and visitors, all integrations, multiple currencies, coupon tracking, self-referral fraud detection, first/last-touch attribution, double-sided incentives. Annual billing includes 2 months free.
+
+- [Pricing & Plans](https://www.rewardful.com/pricing)
+- Starter — $49/mo: up to $7,500/mo from affiliates. 1 campaign, up to 2 team members, REST API, chat & email support.
+- Growth — $99/mo (most popular): up to $15,000/mo. Adds unlimited campaigns and team members, branded affiliate portal, custom domain, private campaigns, custom rewards, custom scripts.
+- Enterprise — $149+/mo: over $15,000/mo. Adds one-click PayPal payouts and phone support. Custom plans on request.
+
+## Billing & Policies
+
+- Requires a Stripe or Paddle account (Paddle Classic included; custom Stripe flows via API).
+- Cancel anytime from your account; access runs to the end of the billing cycle. No partial refunds mid-cycle. Refunded payments auto-recalculate the affiliate commission.
+- Support: hello@rewardful.com — [Cancellation](https://help.rewardful.com/en/articles/11623453-how-to-cancel-your-rewardful-subscription) · [Stripe](https://help.rewardful.com/en/articles/2213091-how-does-rewardful-use-my-stripe-account) · [Paddle](https://help.rewardful.com/en/articles/6664900-how-does-rewardful-use-my-paddle-account) · [All FAQs](https://help.rewardful.com/en/collections/1092743-frequently-asked-questions)
+
+## Features
+
+- [Features overview](https://www.rewardful.com/features)
+- [Managed Payouts](https://www.rewardful.com/managed-payouts): One consolidated payout workflow.
+- [Two-Way Stripe Sync](https://www.rewardful.com/two-way-stripe-sync): Manage affiliate data inside Stripe.
+- [Coupon Code Tracking](https://www.rewardful.com/coupon-code): Attribute referrals via coupons.
+- [PayPal & Wise Mass Payouts](https://www.rewardful.com/paypal-and-wise-mass-payouts): Bulk affiliate payments.
+- [One-Click Integration](https://www.rewardful.com/one-click-integration): No-code setup.
+- [Automated Refund Handling](https://www.rewardful.com/automated-refund-handling): Auto-adjust commissions.
+- [Self-Referral Fraud Detection](https://www.rewardful.com/self-referral-fraud-detection)
+- [Customizable Cookie & Commissions](https://www.rewardful.com/customizable-cookie-and-commissions)
+- [First or Last Touch Attribution](https://www.rewardful.com/first-or-last-touch-attribution)
+- [Live Customer Support](https://www.rewardful.com/live-customer-support)
+- [Assets Library](https://www.rewardful.com/assets-library): Brand assets for affiliates.
+- [Integrations](https://www.rewardful.com/integrations): Stripe, Paddle, and 20+ platforms.
+- [Product Updates](https://www.rewardful.com/product-updates)
+
+## How It Works
+
+- [How Rewardful Works](https://www.rewardful.com/): Connect Stripe/Paddle, set rules, invite affiliates, pay commissions.
+- [Developer Docs & API](https://developers.rewardful.com): REST API for white-labeled programs.
+- [Help Center](https://help.rewardful.com): Setup guides and documentation.
+
+## Proof
+
+- [Customer Success Stories](https://www.rewardful.com/case-studies): Aragon (~2,000 affiliates, $1M revenue), AddSearch (~90% cost cut vs PartnerStack), Huntr (100+ affiliates).
+- [Testimonials](https://www.rewardful.com/testimonials)
+- [Compare to Alternatives](https://www.rewardful.com/alternatives): vs PartnerStack, FirstPromoter, Tapfiliate, Tolt, Refersion, Impact, and others.
+
+## Use Cases
+
+- [All Use Cases](https://www.rewardful.com/use-cases) · [AI & SaaS](https://www.rewardful.com/use-cases/ai) · [Online Courses](https://www.rewardful.com/use-cases/online-courses) · [Financial Tools](https://www.rewardful.com/use-cases/financial-tools) · [Design Tools](https://www.rewardful.com/use-cases/design-tools)
+
+## Learn
+
+- [Free Course](https://academy.rewardful.com) · [Resource Library](https://www.rewardful.com/library) · [Blog](https://www.rewardful.com/articles) · [Pastel Talks](https://www.rewardful.com/pastel-talks) · [Ask Emmet](https://www.rewardful.com/ask-emmet) · [Claude Skill](https://www.rewardful.com/skill) · [Tools](https://www.rewardful.com/tools) · [ROI Calculator](https://www.rewardful.com/affiliate-marketing-roi-calculator)
+
+## Get Started
+
+- [Start free trial](https://app.getrewardful.com/signup) · [Book a demo](https://www.rewardful.com/demo) · [Log in](https://app.getrewardful.com/login)

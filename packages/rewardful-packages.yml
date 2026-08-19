@@ -1,0 +1,100 @@
+generated: '2026-08-14'
+method: searched
+source: https://github.com/rewardful + registry metadata (packagist.org, registry.npmjs.org, rubygems.org)
+name: Rewardful Packages and Client Libraries
+description: >-
+  First-party distribution surface for Rewardful. Rewardful publishes NO official
+  REST API client library in any language — the developer docs state the integration
+  path is plain HTTP against https://api.getrewardful.com/v1 with HTTP Basic Auth.
+  What the company does distribute is a browser tracking script served from a CDN and
+  two archived platform integration plugins. Every package found here is either
+  archived, abandoned on its registry, or unpinned.
+packages:
+  - language: php
+    registry: packagist
+    name: rewardful/rewardful-spark
+    url: https://packagist.org/packages/rewardful/rewardful-spark
+    repository: https://github.com/rewardful/rewardful-spark
+    install: composer require rewardful/rewardful-spark
+    official: true
+    version: v3.0.1
+    published: '2019-12-12'
+    status: abandoned
+    note: >-
+      Laravel Spark integration package, not a REST API client. Packagist flags the
+      package abandoned:true and the GitHub repository is archived. Last release
+      v3.0.1 (2019-12-12) predates every REST API resource documented since — the
+      strongest published decay signal available for this provider.
+  - language: php
+    registry: github
+    name: woocommerce-rewardful
+    url: https://github.com/rewardful/woocommerce-rewardful
+    repository: https://github.com/rewardful/woocommerce-rewardful
+    install: Download the release ZIP and upload it as a WordPress plugin
+    official: true
+    version: v1.1.0
+    published: '2025-02-13'
+    status: archived
+    note: >-
+      WooCommerce/WordPress plugin distributed only from GitHub releases. Not listed
+      on the WordPress.org plugin directory (api.wordpress.org returned 404 for both
+      `rewardful` and `woocommerce-rewardful`), so there is no plugin-registry
+      metadata endpoint to read. GitHub repository is archived.
+  - language: javascript
+    registry: cdn
+    name: rw.js (Rewardful tracking script)
+    url: https://r.wdfl.co/rw.js
+    install: <script async src='https://r.wdfl.co/rw.js' data-rewardful='YOUR-API-KEY'></script>
+    official: true
+    version: null
+    published: null
+    note: >-
+      The browser tracking script and JavaScript API. Distribution is UNPINNED — the
+      documented script tag has no version segment and the S3-backed URL floats to
+      whatever is current (Last-Modified observed 2026-08-14 on probe). There is no
+      registry or CDN metadata endpoint for this host, so no version or release date
+      can be read; a consumer cannot tell which build they are loading either, which
+      is the finding.
+  - language: ruby
+    registry: rubygems
+    name: omniauth-stripe-connect
+    url: https://rubygems.org/gems/omniauth-stripe-connect
+    repository: https://github.com/rewardful/omniauth-stripe-connect
+    official: false
+    version: 2.10.1
+    published: '2018-03-29'
+    note: >-
+      Present in the rewardful GitHub org as a FORK of Isaac Sanders' OmniAuth Stripe
+      Connect strategy. The published gem is authored by Isaac Sanders, not Rewardful,
+      and it wraps Stripe Connect rather than the Rewardful API. Recorded for
+      completeness; NOT a Rewardful client library.
+absent:
+  - registry: npm
+    note: >-
+      No first-party package. npm search returns only third-party work — `rewardful-cli`
+      (bcharleson, 0.1.4, 2026-03-27), `rewardful-ts` (fl0wo, 0.0.13, 2024-11-15),
+      `analytics-plugin-rewardful` (iloveitaly), `@pipedream/rewardful`. None is
+      published by Rewardful Inc.
+  - registry: pypi
+    note: No Rewardful-published package found.
+  - registry: rubygems
+    note: No Rewardful-published API client gem found.
+  - registry: nuget
+    note: No Rewardful-published package found.
+  - registry: maven-central
+    note: No Rewardful-published package found.
+  - registry: crates.io
+    note: No Rewardful-published package found.
+  - registry: pkg.go.dev
+    note: No Rewardful-published module found.
+evidence:
+  - url: https://packagist.org/packages/rewardful/rewardful-spark.json
+    status: 200
+  - url: https://api.github.com/orgs/rewardful/repos
+    status: 200
+  - url: https://api.wordpress.org/plugins/info/1.0/woocommerce-rewardful.json
+    status: 404
+  - url: https://r.wdfl.co/rw.js
+    status: 200
+  - url: https://registry.npmjs.org/-/v1/search?text=rewardful
+    status: 200

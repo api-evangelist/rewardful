@@ -1,0 +1,66 @@
+# Rewardful Developer Center
+
+## Rewardful Developer Center
+
+- [Introduction](https://developers.rewardful.com/readme.md)
+- [Overview](https://developers.rewardful.com/javascript-api/overview.md): Introduction to Rewardful's JavaScript API
+- [Overview](https://developers.rewardful.com/rest-api/overview.md): Introduction to Rewardful's REST API
+- [Campaigns](https://developers.rewardful.com/rest-api/campaigns.md): Create, retrieve, and update campaigns through REST API calls.
+- [The campaign object](https://developers.rewardful.com/rest-api/campaigns/the-campaign-object.md): A campaign represents a specific program offer with its own display settings and rules that affiliates may register to promote.
+- [List campaigns](https://developers.rewardful.com/rest-api/campaigns/list-campaigns.md): Returns a list of all your campaigns.
+- [Create campaign](https://developers.rewardful.com/rest-api/campaigns/create-campaign.md): Creates a new campaign in your account with the specified parameters.
+- [Retrieve campaign](https://developers.rewardful.com/rest-api/campaigns/retrieve-campaign.md): Retrieves the details of an existing campaign specified by its unique identifier.
+- [Update campaign](https://developers.rewardful.com/rest-api/campaigns/update-campaign.md): Updates the specified campaign by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+- [Affiliates](https://developers.rewardful.com/rest-api/affiliates.md): Create, retrieve, and update affiliates through REST API calls.
+- [The affiliate object](https://developers.rewardful.com/rest-api/affiliates/object.md)
+- [List affiliates](https://developers.rewardful.com/rest-api/affiliates/list.md): Returns a list of your affiliates. The affiliates are returned sorted by creation date, with the most recent affiliates appearing first. The list can also be filtered using various criteria.
+- [Create affiliate](https://developers.rewardful.com/rest-api/affiliates/create.md): Creates a new affiliate in your account with the specified parameters.
+- [Retrieve affiliate](https://developers.rewardful.com/rest-api/affiliates/retrieve.md): Retrieves the details of an existing affiliate. You need only supply the unique affiliate identifier that was returned upon affiliate creation.
+- [Update affiliate](https://developers.rewardful.com/rest-api/affiliates/update.md): Updates the specified affiliate by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+- [Magic Link (SSO)](https://developers.rewardful.com/rest-api/affiliates/sso.md): Retrieve a secure, one-time URL that will automatically login an affiliate to their dashboard.
+- [Affiliate Links](https://developers.rewardful.com/rest-api/affiliate-links.md): Create, retrieve, and update affiliate links through REST API calls.
+- [The affiliate link object](https://developers.rewardful.com/rest-api/affiliate-links/the-affiliate-link-object.md)
+- [List affiliate links](https://developers.rewardful.com/rest-api/affiliate-links/list.md): Returns a list of your affiliate links. The links are returned sorted by creation date, with the most recent links appearing first.
+- [Create affiliate link](https://developers.rewardful.com/rest-api/affiliate-links/create.md): Creates a new affiliate link in your account with the specified parameters.
+- [Retrieve affiliate link](https://developers.rewardful.com/rest-api/affiliate-links/retrieve.md): Retrieves the details of an existing affiliate link.
+- [Update affiliate link](https://developers.rewardful.com/rest-api/affiliate-links/update.md): Updates the specified affiliate link by setting the values of the parameters passed.
+- [Affiliate Coupons](https://developers.rewardful.com/rest-api/affiliate-coupons.md): List, create, retrieve, and update affiliate coupons through REST API calls.
+- [The affiliate coupon object](https://developers.rewardful.com/rest-api/affiliate-coupons/the-affiliate-coupon-object.md): Represents a coupon or promotion code created in the payment processor (e.g. Stripe) and assigned to an affiliate for tracking purposes.
+- [List affiliate coupons](https://developers.rewardful.com/rest-api/affiliate-coupons/list-affiliate-coupons.md): Returns a paginated list of your affiliate coupons.
+- [Create affiliate coupon](https://developers.rewardful.com/rest-api/affiliate-coupons/create-affiliate-coupon.md): Creates a new affiliate coupon in your account with the specified parameters.
+- [Retrieve affiliate coupon](https://developers.rewardful.com/rest-api/affiliate-coupons/retrieve-affiliate-coupon.md): Retrieves the details of an existing affiliate coupon.
+- [Referrals](https://developers.rewardful.com/rest-api/referrals.md): A referral represents a unique visitor that arrived on your website through an affiliate link, which may have gone on to become a lead or paying customer (conversion).
+- [The referral object](https://developers.rewardful.com/rest-api/referrals/object.md): A referral represents a unique visit to your website that came via an affiliate link.
+- [List referrals](https://developers.rewardful.com/rest-api/referrals/list.md): Returns a list of your referrals. The referrals are returned sorted by creation date, with the most recent referrals appearing first.
+- [Commissions](https://developers.rewardful.com/rest-api/commissions.md): Commissions represent a reward issues to an affiliate in return for a payment made by a referred customer.
+- [The commission object](https://developers.rewardful.com/rest-api/commissions/object.md): A commission represents a reward issued to an affiliate for a payment from a referred customer.
+- [List commissions](https://developers.rewardful.com/rest-api/commissions/list.md): Returns a list of your commissions. The commissions are returned sorted by creation date, with the most recent commissions appearing first.
+- [Retrieve commission](https://developers.rewardful.com/rest-api/commissions/retrieve.md): Retrieves the details of an existing commission. You need only supply the unique identifier (UUID) associated with the commission.
+- [Update commission](https://developers.rewardful.com/rest-api/commissions/update.md): Updates the specified commission by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+- [Delete commission](https://developers.rewardful.com/rest-api/commissions/delete.md): Permanently deletes a commission. Financial stats for the associated affiliate and campaign will be recalculated.
+- [Payouts](https://developers.rewardful.com/rest-api/payouts.md): Payouts represent a set of one or more due commissions owed to a given affiliate which have been or may be marked as paid collectively.
+- [The payout object](https://developers.rewardful.com/rest-api/payouts/the-payout-object.md): A payout collects a number of payable commissions for a single affiliate in one bundle.
+- [List payouts](https://developers.rewardful.com/rest-api/payouts/list-payouts.md): Returns a list of your payouts. Records are returned sorted by creation date, with the most recent items appearing first.
+- [Retrieve a payout](https://developers.rewardful.com/rest-api/payouts/retrieve-a-payout.md): Retrieves the details of an existing payout. You need only supply the unique identifier (UUID) associated with the payout.
+- [Mark a payout as paid](https://developers.rewardful.com/rest-api/payouts/mark-a-payout-as-paid.md): Records the specified payout and all the commissions associated with it as having been paid.
+- [Overview](https://developers.rewardful.com/webhooks/overview.md): An introduction to Rewardful's webhooks.
+- [Endpoints](https://developers.rewardful.com/webhooks/endpoints.md)
+- [Requests](https://developers.rewardful.com/webhooks/requests.md)
+- [Event types](https://developers.rewardful.com/webhooks/event-types.md): A complete list of the webhook events Rewardful will send to your endpoints.
+- [Signed webhooks](https://developers.rewardful.com/webhooks/signed-webhooks.md)
+
+
+---
+
+# Agent Instructions
+This documentation is published with GitBook. GitBook is the documentation platform designed so that both humans and AI agents can read, navigate, and reason over technical content effectively. Learn more at gitbook.com.
+
+## Querying This Documentation
+If you need additional information, you can query the documentation dynamically by asking a question.
+Perform an HTTP GET request on a page URL with the `ask` query parameter:
+```
+GET https://developers.rewardful.com/readme.md?ask=<question>
+```
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

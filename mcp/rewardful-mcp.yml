@@ -1,0 +1,90 @@
+generated: '2026-08-14'
+method: probed
+source: https://developers.rewardful.com/~gitbook/mcp
+status: published
+name: Rewardful Developer Center MCP Server
+description: >-
+  Rewardful serves a live, anonymous, remote MCP server from its own developer docs
+  host. It is the GitBook documentation MCP (GitBook is Rewardful's docs platform),
+  so its four tools operate over the DOCUMENTATION, not over the Rewardful REST API —
+  an agent can search, read and question the developer docs, but cannot list
+  affiliates or mark a payout paid through it. Recorded as published because the
+  endpoint is real, reachable, unauthenticated and served from developers.rewardful.com;
+  scoped honestly because it is a docs surface, not an operations surface.
+deployment:
+  mode: remote
+  endpoint: https://developers.rewardful.com/~gitbook/mcp
+  auth: none
+  verified: probed
+server:
+  name: rewardful-developer-center
+  transport: http
+  url: https://developers.rewardful.com/~gitbook/mcp
+  protocol_version: '2025-06-18'
+  server_info:
+    name: mcp-typescript server on vercel
+    version: 0.1.0
+  platform: GitBook
+  scope: documentation
+  operations_surface: false
+tools:
+  - name: searchDocumentation
+    description: >-
+      Search across the documentation to find relevant information, code examples, API
+      references, and guides for the Rewardful Developer Center.
+    input_schema:
+      type: object
+      required: [query]
+      properties:
+        query: {type: string}
+    annotations: {readOnlyHint: true, idempotentHint: true, destructiveHint: false}
+  - name: getPage
+    description: Fetch the full markdown content of a specific Rewardful Developer Center page by URL.
+    input_schema:
+      type: object
+      required: [url]
+      properties:
+        url: {type: string, description: The URL of the page to fetch}
+    annotations: {readOnlyHint: true, idempotentHint: true, destructiveHint: false}
+  - name: askQuestion
+    description: >-
+      Ask a natural-language question about the Rewardful Developer Center and get a
+      synthesized answer with links to source pages.
+    input_schema:
+      type: object
+      required: [question]
+      properties:
+        question: {type: string}
+        goal: {type: string, description: Optional broader end goal, used to tailor the answer}
+    annotations: {readOnlyHint: true, idempotentHint: false, destructiveHint: false}
+  - name: sendFeedback
+    description: Report an issue in the Rewardful documentation so the team can fix it.
+    input_schema:
+      type: object
+      required: [content, pageUrl]
+      properties:
+        content: {type: string, minLength: 1, maxLength: 2048}
+        pageUrl: {type: string}
+        goal: {type: string}
+    annotations: {readOnlyHint: false, idempotentHint: false, destructiveHint: false}
+alternate_agent_surface:
+  description: >-
+    The same docs are also queryable over plain HTTP without MCP: appending `.md` to any
+    developer docs URL returns markdown, and a `?ask=<question>` query parameter on any
+    `.md` URL returns a synthesized answer with sources. Both were probed and returned 200.
+  markdown_url_pattern: https://developers.rewardful.com/<path>.md
+  ask_url_pattern: https://developers.rewardful.com/<path>.md?ask=<question>
+third_party_servers:
+  - name: rewardful-cli
+    registry: npm
+    url: https://www.npmjs.com/package/rewardful-cli
+    version: 0.1.4
+    published: '2026-03-27'
+    official: false
+    note: >-
+      A community CLI + stdio MCP server for the Rewardful API published by bcharleson,
+      not by Rewardful Inc. Recorded so the distinction is explicit; it is NOT a
+      Rewardful-operated agent surface and is not counted as one.
+x-evidence:
+  - {url: 'https://developers.rewardful.com/~gitbook/mcp', method: 'POST initialize', http_status: 200, fetched: '2026-08-14'}
+  - {url: 'https://developers.rewardful.com/~gitbook/mcp', method: 'POST tools/list', http_status: 200, tools_returned: 4, fetched: '2026-08-14'}

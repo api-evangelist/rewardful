@@ -1,0 +1,54 @@
+generated: '2026-08-14'
+method: searched
+source: https://developers.rewardful.com/javascript-api/overview + https://www.rewardful.com/features
+name: Rewardful Client-Side and Hosted Components
+description: >-
+  Rewardful's client-side surface is one asynchronous browser script plus a set of hosted,
+  brandable portals. There is no component LIBRARY — no web components, no element library,
+  no embeddable dashboard widget. What exists is a queueing global function (`rewardful(...)`)
+  and Rewardful-hosted pages a merchant themes and points a custom domain at.
+components:
+  - family: Tracking script
+    name: rw.js
+    kind: script-tag
+    loader: "<script async src='https://r.wdfl.co/rw.js' data-rewardful='YOUR-API-KEY'></script>"
+    bootstrap_snippet: "<script>(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');</script>"
+    description: >-
+      Loads asynchronously, sets the referral cookie, and exposes a queueing global
+      `rewardful(methodName, ...args)`. The bootstrap snippet must appear before any call.
+    docs: https://developers.rewardful.com/javascript-api/overview
+    methods:
+      - {name: convert, signature: "rewardful('convert', { email: 'joe@example.com' })", description: 'Client-side conversion tracking; matches the most recent Stripe customer with that email created in the last 24 hours. Requires read-write Stripe connection.'}
+      - {name: ready, signature: "rewardful('ready', function(){ ... })", description: 'Runs a callback once Rewardful has loaded. Always fires, referral or not. Docs warn never to place critical checkout code inside it.'}
+      - {name: source, signature: "rewardful('source', AFFILIATE_LINK_TOKEN)", description: 'Force-attributes the visitor to an affiliate link token; OVERWRITES any existing referral in the cookie.'}
+    attributes:
+      - {name: Rewardful.referral, description: 'Referral UUID of the current visitor, or empty string if not referred.'}
+    url_parameters:
+      - {name: via, description: 'Affiliate link token; creates a referral and stores its id in the cookie.'}
+      - {name: referral, description: 'Preloads a specific referral UUID into the cookie — used for cross-domain and iframe checkout flows to prevent double-counting visitors.'}
+  - family: Hosted portals
+    name: Affiliate portal
+    kind: hosted-page
+    description: >-
+      A Rewardful-hosted dashboard where affiliates sign up, retrieve links, and view stats.
+      Branding and a custom domain are Growth/Enterprise plan features; private invite-only
+      campaigns are supported.
+    docs: https://www.rewardful.com/features
+    plan_gated: [Branded affiliate portal, Custom domain, Private campaigns, Custom scripts]
+    entry: >-
+      Programmatic entry is via GET /v1/affiliates/:id/sso, which returns a single-use magic
+      link that expires after one minute.
+  - family: Hosted portals
+    name: Merchant portal
+    kind: hosted-page
+    description: The Rewardful dashboard where merchants manage campaigns, affiliates, payouts, webhook endpoints, assets, and API credentials.
+    url: https://app.getrewardful.com/
+absent:
+  web_components: true
+  element_library: true
+  embedded_dashboard_widget: true
+  npm_distributed_ui_package: true
+  note: >-
+    Each entry above is a component class Rewardful does NOT ship. No npm-distributed UI
+    package exists (see packages/rewardful-packages.yml); framework wrappers on npm such as
+    vue-rewardful are third-party.

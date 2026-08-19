@@ -1,0 +1,70 @@
+generated: '2026-08-14'
+method: searched
+source: https://developers.rewardful.com/rest-api/overview
+docs: https://developers.rewardful.com/rest-api/overview
+name: Rewardful Authentication Profile
+description: >-
+  Rewardful has three distinct credentials, and they are easy to confuse: a SECRET used for
+  HTTP Basic on the REST API, a PUBLIC key embedded in the browser tracking script, and a
+  per-endpoint webhook Signing Secret. There is no OAuth, no OpenID Connect, no scopes and
+  no per-key permissioning; the REST API Secret is all-or-nothing account access.
+summary:
+  types: [http-basic]
+  api_key_in: [basic-auth-username]
+  oauth2_flows: []
+  scopes: false
+  mtls: false
+  openid_connect: false
+schemes:
+  - name: apiSecretBasic
+    type: http
+    scheme: basic
+    surface: REST API
+    detail: >-
+      The account API Secret is sent as the HTTP Basic USERNAME with an empty password
+      (`curl https://api.getrewardful.com/v1/affiliates -u YOUR_API_SECRET:`), the same
+      convention Stripe uses. Applied to every documented endpoint.
+    credential_location: Rewardful dashboard, Company Settings (https://app.getrewardful.com/company/edit)
+    rotation: >-
+      No self-service rotation is documented; the docs instruct customers to contact
+      Rewardful support to have a compromised secret rotated.
+    privilege: >-
+      Full account access. The docs state the API Secret "grants full access to your
+      Rewardful account" and must never be shared, committed, emailed, or sent to a browser.
+    source: https://developers.rewardful.com/rest-api/overview
+  - name: trackingApiKey
+    type: apiKey
+    in: html-attribute
+    parameter_name: data-rewardful
+    surface: Browser tracking script
+    detail: >-
+      A PUBLIC key embedded in the `<script async src='https://r.wdfl.co/rw.js'
+      data-rewardful='YOUR-API-KEY'>` tag on the merchant's website. Distinct from the API
+      Secret; it is intended to be visible in page source and only identifies the account
+      for client-side referral attribution and conversion tracking.
+    source: https://developers.rewardful.com/javascript-api/overview
+  - name: webhookSigningSecret
+    type: hmac
+    algorithm: HMAC-SHA256
+    surface: Outbound webhooks
+    detail: >-
+      Each webhook endpoint configured in the dashboard gets its own Signing Secret.
+      Rewardful HMAC-SHA256s the raw request body with that secret and sends the hex digest
+      in the `X-Rewardful-Signature` header. Verification is optional but strongly
+      recommended by the docs.
+    source: https://developers.rewardful.com/webhooks/signed-webhooks
+  - name: affiliateMagicLink
+    type: bearer-url
+    surface: Affiliate dashboard SSO
+    detail: >-
+      `GET /v1/affiliates/:id/sso` returns a single-use magic URL that logs an affiliate into
+      their dashboard. Links expire after one minute, cannot be reused, and generating a new
+      one invalidates prior links.
+    source: https://developers.rewardful.com/rest-api/affiliates/sso
+transport:
+  https_required: true
+  note: Webhook receiving endpoints must be served over HTTP/SSL per the webhooks docs.
+gaps:
+  - No OAuth 2.0 or OIDC; third parties cannot obtain delegated, scoped access to a merchant account.
+  - No scopes or read-only keys — every integration holds full-account credentials.
+  - No documented self-service key rotation or multiple concurrent keys.

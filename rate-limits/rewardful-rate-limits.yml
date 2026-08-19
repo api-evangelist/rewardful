@@ -1,3 +1,14 @@
+generated: '2026-08-14'
+method: searched
+source: https://developers.rewardful.com/rest-api/overview
+limit_count: 1
+verified: '2026-08-14'
+verification_note: >-
+  Re-verified against the REST API overview on 2026-08-14. The docs state "In most cases the
+  API rate limit is 45 requests per 30 second window", that 429 responses carry the
+  RateLimit header fields from draft-polli-ratelimit-headers-02, and that Rewardful "may
+  reduce limits at any time to prevent abuse". Only one published limit exists; there is no
+  per-endpoint or per-plan limit table, and no Retry-After header is documented.
 name: Rewardful API Rate Limits
 description: Rate limiting details for the Rewardful REST API, including request thresholds per time window and guidance for handling 429 responses.
 url: https://developers.rewardful.com/rest-api/overview

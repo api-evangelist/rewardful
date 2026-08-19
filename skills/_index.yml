@@ -1,0 +1,60 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.rewardful.com/skill + https://developers.rewardful.com/rest-api/overview
+name: Rewardful Agent Skills
+description: >-
+  Rewardful publishes its own Anthropic-format Agent Skill — a SaaS affiliate-marketing
+  advisory skill, captured verbatim below. It is a knowledge skill, not an API-operations
+  skill: it teaches program strategy and contains no Rewardful API calls. The three
+  pipeline-authored skills alongside it cover the actual REST surface, grounded in the
+  documented HTTP method + path (Rewardful publishes no OpenAPI, so no operationIds exist
+  to reference and none were invented).
+skills:
+  - file: rewardful-saas-affiliate-marketing-expert.md
+    name: SaaS Affiliate Marketing Expert Skill Powered by Rewardful
+    method: searched
+    provider_published: true
+    source: https://www.rewardful.com/skill
+    download: https://drive.usercontent.google.com/download?id=1zqqa-hpv3MK9q3SbsQqF2JQ52erGKL2A
+    format: Anthropic Agent Skill (SKILL.md + references/)
+    api: null
+    operations: []
+    note: >-
+      SKILL.md saved verbatim. The distributed bundle also carries 12 reference documents
+      (templates, case-studies, fraud-and-compliance, recruiting, management-retention,
+      roi-and-budgets, pricing-and-faq, video-content, onboarding-activation,
+      metrics-and-analysis, setup-and-commissions) which are Rewardful's own playbook
+      content and are not mirrored here. Distributed as a ZIP from Google Drive — there is
+      no versioned or registry-published channel, so a consumer cannot pin or diff it.
+  - file: rewardful-onboard-affiliate.md
+    name: Onboard an affiliate into a Rewardful campaign
+    method: generated
+    provider_published: false
+    api: https://api.getrewardful.com/v1
+    operations:
+      - GET /v1/campaigns
+      - POST /v1/affiliates
+      - POST /v1/affiliate_links
+      - POST /v1/affiliate_coupons
+      - GET /v1/affiliates/:id/sso
+  - file: rewardful-reconcile-commissions-and-payouts.md
+    name: Reconcile Rewardful commissions and settle a payout
+    method: generated
+    provider_published: false
+    api: https://api.getrewardful.com/v1
+    operations:
+      - GET /v1/commissions
+      - GET /v1/commissions/:id
+      - GET /v1/payouts
+      - GET /v1/payouts/:id
+      - PUT /v1/payouts/:id/pay
+      - PUT /v1/commissions/:id
+  - file: rewardful-verify-and-consume-webhooks.md
+    name: Verify and consume Rewardful webhooks
+    method: generated
+    provider_published: false
+    api: https://api.getrewardful.com/v1
+    operations:
+      - POST <your endpoint> (inbound)
+      - GET /v1/commissions/:id
+      - GET /v1/payouts/:id

@@ -1,0 +1,51 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.rewardful.com/trust-center
+name: Rewardful Trust Center
+description: >-
+  Rewardful operates a public trust center covering its data-protection posture: controller
+  vs processor split, GDPR/CCPA adherence, technical and organizational measures, a
+  sub-processor list, and a DPA available on request. IMPORTANT ATTRIBUTION NOTE — the page
+  names SOC 1/2/3, FedRAMP, PCI DSS Level 1 and ISO 9001/27001/27017/27018, but attributes
+  every one of them to AMAZON WEB SERVICES, the infrastructure under Rewardful's Heroku
+  hosting. Rewardful claims NO certification of its own on this page, so none is recorded
+  against Rewardful here.
+url: https://www.rewardful.com/trust-center
+page_updated: '2024-01-29'
+certifications: []
+certifications_note: >-
+  No Rewardful-held certification is published. Do not credit Rewardful with the AWS
+  certifications listed on its trust center — they belong to the infrastructure provider.
+infrastructure_provider_certifications:
+  provider: Amazon Web Services (via Heroku, a Salesforce subsidiary)
+  claimed_by: AWS, quoted on the Rewardful trust center
+  certifications:
+    - SOC 1 / ISAE 3402
+    - SOC 2
+    - SOC 3
+    - FISMA
+    - DIACAP
+    - FedRAMP
+    - PCI DSS Level 1
+    - ISO 9001
+    - ISO 27001
+    - ISO 27017
+    - ISO 27018
+privacy_program:
+  frameworks: [GDPR, CCPA]
+  roles: [data controller, data processor]
+  dpa: {available: true, by_default: false, note: Data processing agreement provided on request, not by default.}
+  sub_processors_published: true
+  data_protection_contact: dpo@rewardful.com
+  technical_and_organizational_measures: >-
+    Published as a linked TOMs document; includes SSL encryption of customer data, an access
+    control policy, and recurring employee privacy training. Rewardful is fully remote with
+    no physical offices and manages no physical infrastructure.
+hosting:
+  application: Heroku (Salesforce)
+  underlying_infrastructure: Amazon Web Services
+related_pages:
+  - {name: Terms of Service, url: 'https://www.rewardful.com/terms'}
+  - {name: Privacy Policy, url: 'https://www.rewardful.com/privacy'}
+evidence:
+  - {url: 'https://www.rewardful.com/trust-center', status: 200, keywords: [trust center, gdpr, ccpa, data processing agreement, sub-processors, toms]}

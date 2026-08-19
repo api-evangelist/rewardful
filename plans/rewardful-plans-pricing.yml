@@ -1,3 +1,13 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.rewardful.com/pricing
+plan_count: 3
+verified: '2026-08-14'
+verification_note: >-
+  Re-verified against https://www.rewardful.com/pricing and https://www.rewardful.com/llms.txt
+  (provider-published, self-dated 2026-07-07) on 2026-08-14 — Starter $49, Growth $99,
+  Enterprise $149+, all with a 14-day trial, 0% transaction fee, unlimited affiliates and
+  visitors, and 2 months free on annual billing. No change from the captured tiers.
 name: Rewardful Plans and Pricing
 description: Pricing plans for the Rewardful SaaS affiliate and referral tracking platform, offering tiered plans based on monthly affiliate revenue managed.
 url: https://www.rewardful.com/pricing

@@ -1,0 +1,108 @@
+generated: '2026-08-14'
+method: searched
+source: https://developers.rewardful.com/rest-api/overview
+name: Rewardful API Conventions
+description: >-
+  Cross-cutting request/response semantics for the Rewardful REST API, captured from the
+  developer documentation. Rewardful is a form-encoded-in / JSON-out, HTTP Basic, page
+  paginated API with a custom (non-RFC 9457) error envelope and NO idempotency contract.
+api:
+  base_url: https://api.getrewardful.com/v1
+  docs: https://developers.rewardful.com/rest-api/overview
+  style: REST, resource-oriented URLs
+  request_encoding: application/x-www-form-urlencoded
+  response_encoding: application/json
+authentication:
+  style: http-basic
+  detail: >-
+    HTTP Basic Auth on every request. The account API Secret is supplied as the basic-auth
+    USERNAME and the password is left empty (`-u YOUR_API_SECRET:`), the same shape Stripe
+    uses. There is no OAuth, no scopes, and no per-key permissioning — the API Secret grants
+    full access to the account.
+  see: authentication/rewardful-authentication.yml
+identifiers:
+  primary_key: UUID string
+  note: All resources use UUID string primary keys; store them in a UUID/string column.
+  timestamps: ISO 8601 strings
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    Rewardful documents no idempotency key, no request-replay window, and no retry-safety
+    contract for POST/PUT/DELETE. Repeating a create call creates a second record. NO
+    Idempotency pointer is emitted in apis.yml, because none exists to point at.
+pagination:
+  style: page-number
+  supported: true
+  request_params:
+    - {name: page, description: Page number to fetch}
+    - {name: limit, description: Requested number of objects per page}
+  envelope:
+    root_keys: [pagination, data]
+    data: Array of objects for the requested page
+  response_fields:
+    - {name: previous_page, description: Previous page number, null when there is none}
+    - {name: current_page, description: Current page number}
+    - {name: next_page, description: Next page number, null when there is none}
+    - {name: count, description: Number of objects on this page}
+    - {name: limit, description: Requested objects per page}
+    - {name: total_pages, description: Total number of pages}
+    - {name: total_count, description: Total objects across all pages}
+  note: >-
+    Cursor pagination is not offered. Agents must walk `pagination.next_page` until it is
+    null, and should read `pagination.total_count` before starting a full walk to size the
+    job against the 45-request / 30-second rate limit.
+expansion:
+  supported: true
+  param: expand
+  multi_param: 'expand[]'
+  examples:
+    - '?expand=affiliate'
+    - '?expand[]=affiliate&expand=sale'
+  note: >-
+    Each endpoint's documentation lists which related objects are expandable. Expansion is
+    the only way to avoid N+1 fetches; there is no sparse-fieldset / field-selection param.
+sparse_fields:
+  supported: false
+metadata:
+  supported: false
+  note: No arbitrary key/value metadata surface is documented on Rewardful objects.
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id response header is documented on REST responses. Webhook DELIVERIES do
+    carry a `request.id` UUID in the JSON body, which is the only correlation identifier
+    Rewardful publishes.
+versioning:
+  scheme: uri-path
+  current: v1
+  header: null
+  note: >-
+    Every documented endpoint is under /v1. Webhook payloads carry an event.api_version
+    field whose value is "v1".
+  see: lifecycle/rewardful-lifecycle.yml
+error_envelope:
+  format: custom-json
+  rfc9457: false
+  content_type: application/json
+  shape:
+    error: Human-readable error string
+    details: Optional array of field-level validation messages (422 only)
+  example: '{"error": "Could not create affiliate.", "details": ["Email can''t be blank"]}'
+  see: errors/rewardful-error-codes.yml
+rate_limit_signaling:
+  limit: 45 requests per 30 second window
+  scope: account
+  status_on_exhaustion: 429
+  headers:
+    - name: RateLimit
+      note: >-
+        Documented as the RateLimit header fields from draft-polli-ratelimit-headers-02,
+        returned on 429 responses so clients can back off until quota resets.
+  see: rate-limits/rewardful-rate-limits.yml
+webhooks:
+  supported: true
+  signature_header: X-Rewardful-Signature
+  signature_algorithm: HMAC-SHA256 over the raw request body with the endpoint Signing Secret
+  retry: exponential backoff for up to 3 days on any non-200 response
+  see: asyncapi/rewardful-webhooks.yml

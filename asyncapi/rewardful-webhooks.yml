@@ -1,0 +1,105 @@
+generated: '2026-08-14'
+method: searched
+source: https://developers.rewardful.com/webhooks/event-types
+name: Rewardful Webhook Event Catalog
+description: >-
+  Rewardful publishes NO AsyncAPI document, but it does document a complete outbound webhook
+  surface — 33 event types across seven object families, an HMAC-SHA256 signature, and a
+  three-day exponential-backoff retry contract. Captured here as a webhook catalog; nothing
+  is fabricated into an event spec the provider does not publish.
+spec_type: none
+asyncapi_published: false
+asyncapi_probe:
+  - {url: 'https://developers.rewardful.com/asyncapi.yaml', status: 404}
+  - {url: 'https://api.getrewardful.com/asyncapi.json', status: 404}
+transport:
+  protocol: https
+  method: POST
+  direction: outbound
+  content_type: application/json
+  endpoint_management: https://app.getrewardful.com/webhooks
+  requirements:
+    - Endpoints must be served over HTTP/SSL.
+    - Endpoint must return 200; any other status is treated as a failure.
+  docs: https://developers.rewardful.com/webhooks/endpoints
+payload:
+  root_keys:
+    - {name: object, description: 'JSON representation of the record that triggered the event; identical in structure to the REST API representation of that object type.'}
+    - {name: event, description: 'Event metadata: id (UUID), type, created_at (ISO 8601), api_version.'}
+    - {name: request, description: 'Request metadata: id (UUID) for this specific delivery.'}
+  docs: https://developers.rewardful.com/webhooks/requests
+security:
+  signature_header: X-Rewardful-Signature
+  algorithm: HMAC-SHA256
+  signed_content: raw request body
+  key: per-endpoint Signing Secret from the Webhooks page in the dashboard
+  verification: optional but strongly recommended
+  timestamp_in_signature: false
+  replay_protection: >-
+    None documented. The signature covers the body only — there is no timestamp or nonce in
+    the signature scheme, so a captured delivery can be replayed against the receiver.
+  docs: https://developers.rewardful.com/webhooks/signed-webhooks
+delivery:
+  retry_policy: exponential backoff for up to 3 days, then delivery is abandoned
+  success_status: 200
+  ordering_guarantee: none documented
+  docs: https://developers.rewardful.com/webhooks/requests
+events:
+  - object: affiliate
+    schema_ref: https://developers.rewardful.com/rest-api/affiliates/object
+    types:
+      - {name: affiliate.created, description: An affiliate signs up for your program, or is created through the dashboard or API.}
+      - {name: affiliate.confirmed, description: An affiliate successfully confirms their email address.}
+      - {name: affiliate.updated, description: An affiliate's details are updated.}
+      - {name: affiliate.deleted, description: An affiliate is deleted.}
+  - object: affiliate_link
+    schema_ref: https://developers.rewardful.com/rest-api/affiliate-links/the-affiliate-link-object
+    types:
+      - {name: affiliate_link.created, description: An affiliate link is created.}
+      - {name: affiliate_link.updated, description: An affiliate link is updated.}
+      - {name: affiliate_link.deleted, description: An affiliate link is deleted.}
+  - object: affiliate_coupon
+    schema_ref: https://developers.rewardful.com/rest-api/affiliate-coupons/the-affiliate-coupon-object
+    types:
+      - {name: affiliate_coupon.created, description: An affiliate coupon is created.}
+      - {name: affiliate_coupon.updated, description: An affiliate coupon is updated.}
+      - {name: affiliate_coupon.activated, description: An affiliate coupon is activated again after deactivation.}
+      - {name: affiliate_coupon.deactivated, description: An affiliate coupon is deactivated.}
+      - {name: affiliate_coupon.deleted, description: An affiliate coupon is deleted.}
+  - object: referral
+    schema_ref: https://developers.rewardful.com/rest-api/referrals/object
+    types:
+      - {name: referral.created, description: A referral is created.}
+      - {name: referral.lead, description: A referral transitions to a "lead" state.}
+      - {name: referral.converted, description: A referral transitions to a "conversion" state (paid customer).}
+      - {name: referral.deleted, description: A referral is deleted.}
+  - object: sale
+    schema_ref: null
+    note: The sale object has no standalone REST object reference page in the developer center.
+    types:
+      - {name: sale.created, description: A sale is created.}
+      - {name: sale.updated, description: A sale is updated.}
+      - {name: sale.refunded, description: A sale is refunded.}
+      - {name: sale.deleted, description: A sale is deleted.}
+  - object: commission
+    schema_ref: https://developers.rewardful.com/rest-api/commissions/object
+    types:
+      - {name: commission.created, description: A new commission is created.}
+      - {name: commission.updated, description: A commission is updated.}
+      - {name: commission.paid, description: A commission is paid.}
+      - {name: commission.voided, description: A commission is voided.}
+      - {name: commission.deleted, description: A commission is deleted.}
+  - object: payout
+    schema_ref: https://developers.rewardful.com/rest-api/payouts/the-payout-object
+    types:
+      - {name: payout.created, description: A new payout is created.}
+      - {name: payout.updated, description: A payout is updated.}
+      - {name: payout.due, description: A payout is due.}
+      - {name: payout.paid, description: A payout is paid.}
+      - {name: payout.deleted, description: A payout is deleted.}
+      - {name: payout.failed, description: A payout fails.}
+summary:
+  object_families: 7
+  event_types: 33
+  signed: true
+  asyncapi: false

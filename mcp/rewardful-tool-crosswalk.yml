@@ -1,0 +1,88 @@
+generated: '2026-08-14'
+method: derived
+source: mcp/rewardful-mcp.yml + https://developers.rewardful.com/llms.txt
+name: Rewardful MCP <-> REST Tool Crosswalk
+description: >-
+  Binds Rewardful's live MCP tools to the REST operations they back. The finding is a
+  total divergence: all four MCP tools operate on documentation, and NONE of the 24
+  documented REST operations has a tool. Rewardful publishes no OpenAPI, so the REST
+  side of this crosswalk is enumerated from the developer documentation (method + path
+  + doc URL) rather than from operationIds in a spec; no operationIds are invented.
+surfaces:
+  openapi:
+    present: false
+    note: >-
+      No OpenAPI/Swagger document is published. Probed /openapi.json, /openapi.yaml,
+      /swagger.json, /v1/openapi.json, /api-docs, /docs and /redoc on
+      api.getrewardful.com and developers.rewardful.com — all 404.
+  graphql:
+    present: false
+  mcp:
+    endpoint: https://developers.rewardful.com/~gitbook/mcp
+    gated: false
+    note: tools/list returned 200 anonymously; input schemas below are the real published ones.
+crosswalk: []
+mcp_only:
+  - tool: searchDocumentation
+    reason: Documentation search over the GitBook-hosted developer center; no REST equivalent.
+  - tool: getPage
+    reason: Fetches a documentation page as markdown; no REST equivalent.
+  - tool: askQuestion
+    reason: Retrieval-augmented answer over the docs corpus; no REST equivalent.
+  - tool: sendFeedback
+    reason: Files a docs issue with the Rewardful documentation team; no REST equivalent.
+rest_only:
+  - capability: Campaigns
+    docs: https://developers.rewardful.com/rest-api/campaigns
+    operations:
+      - {method: GET, path: /v1/campaigns, docs: https://developers.rewardful.com/rest-api/campaigns/list-campaigns}
+      - {method: POST, path: /v1/campaigns, docs: https://developers.rewardful.com/rest-api/campaigns/create-campaign}
+      - {method: GET, path: '/v1/campaigns/:id', docs: https://developers.rewardful.com/rest-api/campaigns/retrieve-campaign}
+      - {method: PUT, path: '/v1/campaigns/:id', docs: https://developers.rewardful.com/rest-api/campaigns/update-campaign}
+  - capability: Affiliates
+    docs: https://developers.rewardful.com/rest-api/affiliates
+    operations:
+      - {method: GET, path: /v1/affiliates, docs: https://developers.rewardful.com/rest-api/affiliates/list}
+      - {method: POST, path: /v1/affiliates, docs: https://developers.rewardful.com/rest-api/affiliates/create}
+      - {method: GET, path: '/v1/affiliates/:id', docs: https://developers.rewardful.com/rest-api/affiliates/retrieve}
+      - {method: PUT, path: '/v1/affiliates/:id', docs: https://developers.rewardful.com/rest-api/affiliates/update}
+      - {method: GET, path: '/v1/affiliates/:id/sso', docs: https://developers.rewardful.com/rest-api/affiliates/sso}
+  - capability: Affiliate Links
+    docs: https://developers.rewardful.com/rest-api/affiliate-links
+    operations:
+      - {method: GET, path: /v1/affiliate_links, docs: https://developers.rewardful.com/rest-api/affiliate-links/list}
+      - {method: POST, path: /v1/affiliate_links, docs: https://developers.rewardful.com/rest-api/affiliate-links/create}
+      - {method: GET, path: '/v1/affiliate_links/:id', docs: https://developers.rewardful.com/rest-api/affiliate-links/retrieve}
+      - {method: PUT, path: '/v1/affiliate_links/:id', docs: https://developers.rewardful.com/rest-api/affiliate-links/update}
+  - capability: Affiliate Coupons
+    docs: https://developers.rewardful.com/rest-api/affiliate-coupons
+    operations:
+      - {method: GET, path: /v1/affiliate_coupons, docs: https://developers.rewardful.com/rest-api/affiliate-coupons/list-affiliate-coupons}
+      - {method: POST, path: /v1/affiliate_coupons, docs: https://developers.rewardful.com/rest-api/affiliate-coupons/create-affiliate-coupon}
+      - {method: GET, path: '/v1/affiliate_coupons/:id', docs: https://developers.rewardful.com/rest-api/affiliate-coupons/retrieve-affiliate-coupon}
+  - capability: Referrals
+    docs: https://developers.rewardful.com/rest-api/referrals
+    operations:
+      - {method: GET, path: /v1/referrals, docs: https://developers.rewardful.com/rest-api/referrals/list}
+  - capability: Commissions
+    docs: https://developers.rewardful.com/rest-api/commissions
+    operations:
+      - {method: GET, path: /v1/commissions, docs: https://developers.rewardful.com/rest-api/commissions/list}
+      - {method: GET, path: '/v1/commissions/:id', docs: https://developers.rewardful.com/rest-api/commissions/retrieve}
+      - {method: PUT, path: '/v1/commissions/:id', docs: https://developers.rewardful.com/rest-api/commissions/update}
+      - {method: DELETE, path: '/v1/commissions/:id', docs: https://developers.rewardful.com/rest-api/commissions/delete}
+  - capability: Payouts
+    docs: https://developers.rewardful.com/rest-api/payouts
+    operations:
+      - {method: GET, path: /v1/payouts, docs: https://developers.rewardful.com/rest-api/payouts/list-payouts}
+      - {method: GET, path: '/v1/payouts/:id', docs: https://developers.rewardful.com/rest-api/payouts/retrieve-a-payout}
+      - {method: PUT, path: '/v1/payouts/:id/pay', docs: https://developers.rewardful.com/rest-api/payouts/mark-a-payout-as-paid}
+coverage:
+  tools_named: 4
+  tools_bound_to_rest: 0
+  mcp_only: 4
+  rest_operations_total: 24
+  rest_operations_with_tool: 0
+  note: >-
+    Zero overlap. Rewardful's agent surface today is read-only documentation access;
+    the account-operations API is reachable only over HTTP Basic REST.

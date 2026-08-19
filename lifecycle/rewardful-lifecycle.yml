@@ -1,0 +1,58 @@
+generated: '2026-08-14'
+method: searched
+source: https://developers.rewardful.com/rest-api/overview + https://status.rewardful.com/
+name: Rewardful API Lifecycle
+description: >-
+  Versioning, deprecation and operational-transparency posture for the Rewardful REST API.
+  Versioning is a bare /v1 URI prefix; there is NO published deprecation policy, no Sunset
+  header support and no SLA document. A real, public status page is operated.
+versioning:
+  scheme: uri-path
+  current: v1
+  since: null
+  docs: https://developers.rewardful.com/rest-api/overview
+  note: >-
+    Every documented endpoint sits under https://api.getrewardful.com/v1. Webhook payloads
+    stamp `event.api_version: "v1"`. No version header, no date-pinned version train, and
+    no announced v2.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  notice_period: null
+  note: >-
+    No deprecation policy, notice period, or RFC 8594 Sunset/Deprecation header support is
+    documented anywhere in the developer center. The only forward-looking caveat published
+    is on rate limits: "We may reduce limits at any time to prevent abuse." No Deprecation
+    pointer is emitted in apis.yml, because there is no policy to point at.
+sla:
+  url: null
+  uptime_target: null
+  note: No SLA or uptime commitment is published; the status page reports observed uptime only.
+status_page:
+  url: https://status.rewardful.com/
+  provider: Hyperping
+  state_at_probe: All systems operational
+  window: 90 days
+  components:
+    - {group: Website, name: Rewardful.com, uptime_90d: '100.000%'}
+    - {group: Application, name: Merchant portal, uptime_90d: '100.000%'}
+    - {group: Application, name: Affiliate portals, uptime_90d: '100.000%'}
+    - {group: Application, name: Custom domains, uptime_90d: '100.000%'}
+    - {group: API, name: Merchant API, uptime_90d: '100.000%'}
+    - {group: Referral tracking, name: Tracking script, uptime_90d: '100.000%'}
+    - {group: Referral tracking, name: Referral tracking API, uptime_90d: '100.000%'}
+  machine_readable_feed: false
+  feed_note: >-
+    Probed https://status.rewardful.com/history.atom (404) and /api/v2/summary.json (404) —
+    the status page is human-readable only, so an agent cannot subscribe to incidents.
+change_log:
+  url: https://www.rewardful.com/product-updates
+  see: changelog/rewardful-changelog.yml
+  note: Product-release notes, not an API changelog; no API-level change history is published.
+deprecated_operations: []
+evidence:
+  - {url: 'https://status.rewardful.com/', status: 200}
+  - {url: 'https://status.rewardful.com/history.atom', status: 404}
+  - {url: 'https://status.rewardful.com/api/v2/summary.json', status: 404}
+  - {url: 'https://developers.rewardful.com/rest-api/overview', status: 200}

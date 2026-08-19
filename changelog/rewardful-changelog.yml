@@ -1,0 +1,55 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.rewardful.com/product-updates
+name: Rewardful Product Updates
+description: >-
+  Rewardful publishes a dated product-updates page. It is a PRODUCT changelog, not an API
+  changelog — no entry records an API version, endpoint addition, field change, or breaking
+  change, and the developer center carries no change history of its own. Recent window only.
+url: https://www.rewardful.com/product-updates
+scheme: dated-release-notes
+api_changelog: false
+api_changelog_note: >-
+  There is no API-specific changelog. An integrator cannot tell from any published source
+  when an endpoint, field, or webhook event type was added or changed.
+current_version: v1
+entries:
+  - date: '2026-06-05'
+    category: New feature
+    title: 'Introducing the Assets Library: Affiliate Materials in One Place'
+    breaking: false
+    highlights:
+      - New Assets tab in the merchant dashboard for files, links, and text snippets.
+      - Published assets are visible to all affiliates across all campaigns; drafts supported.
+      - Supported formats JPG, PNG, PDF; 25MB maximum file size.
+    api_impact: 'None documented — no REST endpoint or webhook event was published for assets.'
+  - date: '2026-03-25'
+    category: Improvement
+    title: PDF Invoices for Managed Payouts Merchants
+    breaking: false
+    highlights:
+      - Managed Payouts merchants can download invoice PDFs directly from Rewardful.
+    api_impact: None documented.
+  - date: '2025-12-05'
+    category: New feature
+    title: Rewardful Simplifies Affiliate Payouts With Managed Payouts
+    breaking: false
+    highlights:
+      - Managed Payouts consolidates affiliate commissions into a single funded invoice.
+      - Replaces chasing tax forms and sending individual payments across PayPal, Wise and bank transfer.
+    api_impact: None documented.
+  - date: '2025-08-19'
+    category: Improvement
+    title: Block Referral Traffic from Custom Domains
+    breaking: false
+    api_impact: None documented.
+  - date: '2025-07-25'
+    category: Improvement
+    title: Affiliate Program Management Simplified
+    breaking: false
+    api_impact: None documented.
+feed:
+  rss: null
+  note: No machine-readable feed for product updates was found; the page is HTML only.
+evidence:
+  - {url: 'https://www.rewardful.com/product-updates', status: 200}

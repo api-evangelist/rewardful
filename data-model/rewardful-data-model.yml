@@ -1,0 +1,97 @@
+generated: '2026-08-14'
+method: derived
+source: >-
+  vocabulary/rewardful-vocabulary.yml + the object-reference pages of
+  https://developers.rewardful.com/rest-api/ (campaign, affiliate, affiliate link,
+  affiliate coupon, referral, commission, payout objects)
+name: Rewardful Data Model
+description: >-
+  Entity-relationship graph for the Rewardful REST API, derived from the published object
+  reference pages and the existing repo vocabulary. No OpenAPI exists to walk $refs, so
+  relationships are read from the documented JSON examples and attribute tables — every
+  edge below appears verbatim as a nested object, an array, or an *_id field in the docs.
+identifiers:
+  scheme: UUID string
+  prefixes: none
+  note: >-
+    Rewardful uses bare UUIDs with no type prefix, so an id alone does not tell you what
+    object it addresses. Foreign identifiers from external systems keep THEIR prefixes and
+    are carried through untouched — Stripe customer (cus_), account (acct_), charge (ch_)
+    and promotion code (promo_) ids all appear inside Rewardful objects.
+entities:
+  - name: Campaign
+    docs: https://developers.rewardful.com/rest-api/campaigns/the-campaign-object
+    description: A program offer with its own commission rules, cookie window, and display settings that affiliates register to promote.
+    key_fields: [id, name, url, private, reward_type, commission_percent, commission_amount_cents, minimum_payout_cents, days_before_referrals_expire, days_until_commissions_are_due, max_commission_period_months, max_commissions, parameter_type, stripe_coupon_id, default]
+    rollup_fields: [visitors, leads, conversions, affiliates]
+  - name: Affiliate
+    docs: https://developers.rewardful.com/rest-api/affiliates/object
+    description: A partner promoting a campaign, or a customer in a customer-referral program.
+    key_fields: [id, first_name, last_name, email, paypal_email, wise_email, state, stripe_customer_id, stripe_account_id]
+    states: [active, disabled, suspicious]
+    rollup_fields: [visitors, leads, conversions]
+  - name: AffiliateLink
+    docs: https://developers.rewardful.com/rest-api/affiliate-links/the-affiliate-link-object
+    description: A trackable URL (campaign URL plus a unique token) attributed to one affiliate.
+    key_fields: [id, url, token, affiliate_id]
+    rollup_fields: [visitors, leads, conversions]
+  - name: AffiliateCoupon
+    docs: https://developers.rewardful.com/rest-api/affiliate-coupons/the-affiliate-coupon-object
+    description: A coupon or promotion code created in the payment processor and assigned to an affiliate for coupon-based attribution.
+    key_fields: [id, external_id, token, archived, archived_at, affiliate_id]
+    rollup_fields: [leads, conversions]
+    external_binding: {system: Stripe, field: external_id, example_prefix: promo_}
+  - name: Referral
+    docs: https://developers.rewardful.com/rest-api/referrals/object
+    description: A unique visitor who arrived through an affiliate link, which may progress to lead and then conversion.
+    key_fields: [id, conversion_state, visits, expires_at, deactivated_at, stripe_account_id, stripe_customer_id]
+    states: [visitor, lead, conversion]
+  - name: Customer
+    docs: https://developers.rewardful.com/rest-api/referrals/object
+    description: The referred end customer, embedded inside referral objects. Not an independently addressable Rewardful resource.
+    key_fields: [id, name, email, platform]
+    addressable: false
+    external_binding: {system: Stripe or Paddle, field: id, example_prefix: cus_}
+  - name: Sale
+    docs: https://developers.rewardful.com/rest-api/commissions/object
+    description: A payment made by a referred customer, embedded inside commission objects and carried on sale.* webhook events. Has no REST collection of its own.
+    key_fields: [id, currency, charged_at, invoiced_at, charge_amount_cents, refund_amount_cents, tax_amount_cents, sale_amount_cents, stripe_account_id, stripe_charge_id]
+    addressable: false
+  - name: Commission
+    docs: https://developers.rewardful.com/rest-api/commissions/object
+    description: A reward owed to an affiliate for a payment from a referred customer.
+    key_fields: [id, amount, currency, state, due_at, paid_at, voided_at]
+    states: [due, paid, voided]
+  - name: Payout
+    docs: https://developers.rewardful.com/rest-api/payouts/the-payout-object
+    description: A bundle of payable commissions for a single affiliate, marked paid collectively.
+    key_fields: [id, amount, currency, state, paid_at, paid_by_id]
+    states: [pending, due, processing, paid]
+relationships:
+  - {from: Campaign, to: Affiliate, type: has_many, via: campaign, evidence: 'affiliate.campaign is an embedded campaign object; campaign.affiliates is a count rollup.'}
+  - {from: Affiliate, to: Campaign, type: belongs_to, via: campaign, evidence: 'affiliate.campaign embedded object.'}
+  - {from: Affiliate, to: AffiliateLink, type: has_many, via: links, evidence: 'affiliate.links[] array of link objects; affiliate_link.affiliate_id back-reference.'}
+  - {from: AffiliateLink, to: Affiliate, type: belongs_to, via: affiliate_id, evidence: 'affiliate_link.affiliate_id.'}
+  - {from: Affiliate, to: AffiliateCoupon, type: has_one, via: coupon, evidence: 'affiliate.coupon embedded object; affiliate_coupon.affiliate_id back-reference.'}
+  - {from: AffiliateCoupon, to: Affiliate, type: belongs_to, via: affiliate_id, evidence: 'affiliate_coupon.affiliate_id.'}
+  - {from: AffiliateLink, to: Referral, type: has_many, via: link, evidence: 'referral.link embedded link object.'}
+  - {from: Referral, to: AffiliateLink, type: belongs_to, via: link, evidence: 'referral.link embedded object.'}
+  - {from: Referral, to: Affiliate, type: belongs_to, via: affiliate, evidence: 'referral.affiliate embedded object.'}
+  - {from: Referral, to: Customer, type: has_one, via: customer, evidence: 'referral.customer embedded object.'}
+  - {from: Referral, to: Sale, type: has_many, via: referral, evidence: 'sale.referral embedded object inside commission.sale.'}
+  - {from: Sale, to: Referral, type: belongs_to, via: referral, evidence: 'commission.sale.referral embedded object.'}
+  - {from: Commission, to: Sale, type: belongs_to, via: sale, evidence: 'commission.sale embedded object.'}
+  - {from: Commission, to: Campaign, type: belongs_to, via: campaign, evidence: 'commission.campaign embedded object.'}
+  - {from: Payout, to: Affiliate, type: belongs_to, via: affiliate, evidence: 'payout.affiliate embedded object.'}
+  - {from: Payout, to: Commission, type: has_many, via: commissions, evidence: 'payout.commissions[] array of commission objects.'}
+expansion:
+  param: expand
+  note: >-
+    Related objects are inlined only when requested with ?expand= / ?expand[]=; the docs list
+    the expandable objects per endpoint. Without expansion the graph must be walked by id.
+external_systems:
+  - {system: Stripe, bindings: [stripe_account_id, stripe_customer_id, stripe_charge_id, stripe_coupon_id, affiliate_coupon.external_id]}
+  - {system: Paddle, bindings: [customer.platform]}
+  - {system: PayPal, bindings: [affiliate.paypal_email, affiliate.paypal_email_confirmed_at]}
+  - {system: Wise, bindings: [affiliate.wise_email, affiliate.wise_email_confirmed_at]}
+render: null

@@ -1,0 +1,89 @@
+generated: '2026-08-14'
+method: searched
+source: https://developers.rewardful.com/rest-api/overview + https://www.rewardful.com/trust-center
+name: Rewardful Standards Conformance
+description: >-
+  Which cross-cutting standards the Rewardful REST API and webhook surface actually conform
+  to, asserted from the published documentation. Rewardful is a conventional Basic-auth JSON
+  API: no OAuth, no OIDC, no RFC 9457 errors, no OpenAPI. It does adopt the IETF RateLimit
+  header draft and HMAC-SHA256 webhook signatures.
+standards:
+  - id: http-basic-auth
+    conforms: true
+    evidence: 'RFC 7617 Basic auth on every endpoint; API Secret as username, empty password.'
+    source: https://developers.rewardful.com/rest-api/overview
+  - id: oauth2
+    conforms: false
+    evidence: No OAuth authorization or token endpoint is documented; /.well-known/oauth-authorization-server returned 404 on all hosts.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returned 404 on all hosts.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      No OpenAPI/Swagger document published. /openapi.json, /openapi.yaml, /swagger.json,
+      /v1/openapi.json, /api-docs, /docs and /redoc all 404 on api.getrewardful.com and
+      developers.rewardful.com.
+  - id: asyncapi
+    conforms: false
+    evidence: No AsyncAPI document; the event surface is documented as prose webhook tables only.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 'Errors return a flat {"error": "...", "details": [...]} JSON body, not application/problem+json.'
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No Sunset or Deprecation header support and no deprecation policy documented.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: /.well-known/security.txt returned 404 on all three hosts.
+  - id: ietf-ratelimit-headers
+    conforms: true
+    evidence: >-
+      Docs explicitly cite draft-polli-ratelimit-headers-02 and state that 429 responses carry
+      RateLimit header fields for quota-reset handling.
+    source: https://developers.rewardful.com/rest-api/overview
+  - id: idempotency-key
+    conforms: false
+    evidence: No idempotency key header, replay window, or retry-safety contract is documented.
+  - id: pagination
+    conforms: true
+    style: page-number
+    evidence: 'List endpoints accept ?page= and ?limit= and return a pagination envelope with previous_page/current_page/next_page/count/limit/total_pages/total_count.'
+    source: https://developers.rewardful.com/rest-api/overview
+  - id: webhook-hmac-signatures
+    conforms: true
+    evidence: HMAC-SHA256 of the raw body with a per-endpoint Signing Secret, delivered in X-Rewardful-Signature.
+    source: https://developers.rewardful.com/webhooks/signed-webhooks
+  - id: iso8601-datetimes
+    conforms: true
+    evidence: All dates and times in the API are ISO 8601 formatted strings.
+    source: https://developers.rewardful.com/rest-api/overview
+  - id: uuid-identifiers
+    conforms: true
+    evidence: All resource primary keys are UUID strings.
+    source: https://developers.rewardful.com/rest-api/overview
+  - id: json-api
+    conforms: false
+    evidence: Custom envelope; not JSON:API. Request bodies are form-encoded, not JSON.
+  - id: gdpr
+    conforms: true
+    evidence: >-
+      Trust center documents controller/processor roles, GDPR and CCPA adherence, TOMs, a
+      published sub-processor list, and a DPA available on request (dpo@rewardful.com).
+    source: https://www.rewardful.com/trust-center
+  - id: ccpa
+    conforms: true
+    evidence: Named alongside GDPR in the trust center data-handling section.
+    source: https://www.rewardful.com/trust-center
+  - id: soc2
+    conforms: false
+    evidence: >-
+      Rewardful publishes no SOC 2 attestation of its own. The SOC/ISO/PCI/FedRAMP
+      certifications on its trust center are attributed to Amazon Web Services, the
+      infrastructure beneath its Heroku hosting — not to Rewardful.
+    source: https://www.rewardful.com/trust-center
+  - id: pci-dss
+    conforms: false
+    evidence: >-
+      Rewardful does not touch card data directly; payments and payouts run through Stripe,
+      Paddle, PayPal and Wise. The PCI DSS Level 1 reference on the trust center belongs to AWS.
