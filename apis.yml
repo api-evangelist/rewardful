@@ -38,6 +38,19 @@ specificationVersion: '0.23'
 tags:
   - Affiliate Tracking
   - Referral Programs
+  - Software-as-a-Service
+  - Stripe
+  - Commissions
+  - Payouts
+  - Affiliate Marketing
+  - Partner Programs
+  - Attribution
+  - Webhook
+  - Paddle
+  - Marketing
+tags_raw:
+  - Affiliate Tracking
+  - Referral Programs
   - SaaS
   - Stripe
   - Commissions
@@ -56,6 +69,13 @@ apis:
     humanURL: https://developers.rewardful.com/rest-api/overview
     baseURL: https://api.getrewardful.com/v1
     tags:
+      - Affiliates
+      - Campaigns
+      - Referrals
+      - Commissions
+      - Payouts
+      - Webhook
+    tags_raw:
       - Affiliates
       - Campaigns
       - Referrals
