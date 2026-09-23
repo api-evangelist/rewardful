@@ -1,0 +1,26 @@
+# Front Door AI Index — rewardful — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: rewardful
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.rewardful.com
+  final_host: www.rewardful.com
+  ownership: own
+  owner: rewardful
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 9
+  host_score: 9
+  density: 3.84
+  words: 2344
+  tiers:
+    agentic: 0
+    core: 8
+    model: 1
+  ambiguous: 0
+  top_terms:
+    AI: 8
+    Claude: 1
