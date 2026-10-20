@@ -1,9 +1,26 @@
-generated: '2026-10-15'
+generated: '2026-10-20'
 method: searched
-checked:
-- stripe/integrations/stripe-integration-edges.yml
 source:
 - stripe/integrations/stripe-integration-edges.yml
+- https://n8n.io/integrations/rewardful/
+checked:
+- stripe/integrations/stripe-integration-edges.yml
+- https://composio.dev/toolkits/rewardful
+- https://monid.ai/tools/rewardful
+- https://n8n.io/integrations/rewardful/
+- https://zapier.com/apps/rewardful/integrations
+summary: null
+marketplace_apps:
+- marketplace: n8n
+  channel: open-source-node
+  app: rewardful
+  url: https://n8n.io/integrations/rewardful/
+  identity: title
+  pair_pages: 3
+  pairs:
+  - slack
+  - supabase
+  - telegram
 edges:
 - partner_name: Stripe (own)
   partner: stripe
@@ -22,3 +39,4 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: affiliate_and_referrals
+templates: []
