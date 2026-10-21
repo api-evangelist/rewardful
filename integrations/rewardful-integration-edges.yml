@@ -9,6 +9,13 @@ checked:
 - https://monid.ai/tools/rewardful
 - https://n8n.io/integrations/rewardful/
 - https://zapier.com/apps/rewardful/integrations
+- https://docs.stripe.com/stripe-apps
+- https://docs.stripe.com/stripe-apps/review-requirements
+- https://marketplace.stripe.com/
+- https://marketplace.stripe.com/appm/apps
+- https://stripe.com/partners/directory
+- https://stripe.com/partners/verified-partners
+- https://stripe.partners/sitemap.xml
 summary: null
 marketplace_apps:
 - marketplace: n8n
@@ -39,4 +46,50 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: affiliate_and_referrals
+- partner_name: Stripe Partner Ecosystem
+  partner: stripe
+  partner_match: register
+  type: register
+  direction: partner-built
+  channel: standard-directory
+  relationship: standard-participant
+  evidence: https://stripe.partners/directory/rewardful
+  category: Stripe ecosystem partner
+  contract_reference:
+    register: Stripe Partner Ecosystem directory (stripe.com/partners/directory -> stripe.partners, PartnerPage
+      SSR __NUXT_DATA__)
+    standard: Stripe Partner Ecosystem
+    spec_file: null
+    role: stripe-verified-partner
+    registered_name: Rewardful
+    register_id: rewardful
+    partner_tier:
+    - Premier Apps Partner
+    matched_domain: rewardful.com
+    matched_by: domain
+    identity_source: the directory's own website field for the partner (no lookup)
+    signal_note: 'certified_products = ONE entry per verified product type (Premier Apps / SaaS Platform / Payments
+      Partner: Stripe verified the product integration; no dates printed, lapsed null = unknown); Premier Services
+      Partner is a services tier (partner_tier only); Certified Professional Developers certify PEOPLE (context);
+      callouts / products never counted'
+    context:
+      callouts:
+      - Marketing and sales
+      stripe_products:
+      - Billing
+      - Checkout
+      - Connect
+      - Invoicing
+      - Payments
+      location: Calgary, Alberta, Canada
+    detected_by: sweep-stripe-app-marketplace.py
+    detected: '2026-10-21'
+    certified_products:
+    - product: Rewardful
+      product_type: Stripe App (verified app integration)
+      certifier: Stripe (Verified Partner program)
+      verification: Premier Apps Partner
+      lapsed: null
+  detected_by: sweep-stripe-app-marketplace.py
+  first_seen: '2026-10-21'
 templates: []
